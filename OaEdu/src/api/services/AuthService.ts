@@ -9,15 +9,27 @@ class AuthService {
     this.httpClient = new HttpClient({ baseURL: "http://20.19.91.105:8000" });
   }
 
-  async login(login: string, password: string): Promise<boolean> {
+  async login(username: string, password: string): Promise<boolean> {
     try {
-      const token = await this.httpClient.post<string>("/identity/token", {
-        login,
-        password,
-      });
+      const formData = new URLSearchParams();
+      formData.append("username", username);
+      formData.append("password", password);
+
+      const response = await this.httpClient.post<{ access_token: string }>(
+        "/users/login-via-email",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      );
+      const token = response.access_token;
       localStorage.setItem(AuthService.tokenKey, token);
+      console.log("Token stored in local storage:", token);
       return true;
-    } catch {
+    } catch (error) {
+      console.error("Login error:", error);
       return false;
     }
   }
