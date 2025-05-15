@@ -1,39 +1,34 @@
-import React, { createContext, useContext, useState } from "react";
-import { lightThemeTokens } from "./design-tokens/light-theme-token";
-import { darkThemeTokens } from "./design-tokens/dark-theme-tokens";
+import React, { createContext, useContext, useState, useMemo } from "react";
+import type { ReactNode } from "react";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import { themes } from "./design-tokens/tokens";
 
 interface ThemeContextType {
-  theme: typeof lightThemeTokens;
   toggleTheme: () => void;
+  mode: "light" | "dark";
 }
 
-const ThemeContext = createContext<ThemeContextType | null>(null);
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    return savedTheme === "dark" ? darkThemeTokens : lightThemeTokens;
-  });
+  const [mode, setMode] = useState<"light" | "dark">("light");
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => {
-      const newTheme =
-        prevTheme === lightThemeTokens ? darkThemeTokens : lightThemeTokens;
-      localStorage.setItem("theme", newTheme === darkThemeTokens ? "dark" : "light");
-      return newTheme;
-    });
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
+  const theme = useMemo(() => themes[mode], [mode]);
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
+    <ThemeContext.Provider value={{ toggleTheme, mode }}>
+      <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
     </ThemeContext.Provider>
   );
 };
 
-export const useTheme = (): ThemeContextType => {
+export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
     throw new Error("useTheme must be used within a ThemeProvider");
