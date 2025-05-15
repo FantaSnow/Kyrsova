@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers/AuthContext";
 import { useTheme } from "../../providers/theme/ThemeProvider";
-import "../../css/AuthTile.css";
+import { Box, Button, TextField, Typography, Paper } from "@mui/material";
 
 const Login: React.FC = () => {
   const [login, setLogin] = useState("");
@@ -28,67 +28,97 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div
-      className="login-page"
-      style={{
+    <Box
+      sx={{
         backgroundColor: theme.colors.background,
         color: theme.colors.text,
         fontFamily: theme.typography.fontFamily,
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <div className="form">
-        <form className="login-form" onSubmit={handleLogin}>
-          <input
-            type="text"
-            placeholder="Логін"
+      <Paper
+        elevation={3}
+        sx={{
+          padding: theme.spacing(4),
+          maxWidth: "400px",
+          width: "100%",
+        }}
+      >
+        <Typography
+          variant="h4"
+          sx={{
+            marginBottom: theme.spacing(2),
+            textAlign: "center",
+          }}
+        >
+          Вхід
+        </Typography>
+        <form onSubmit={handleLogin}>
+          <TextField
+            fullWidth
+            label="Логін"
+            variant="outlined"
             value={login}
             onChange={(e) => setLogin(e.target.value)}
-            style={{
-              backgroundColor: theme.colors.background,
-              color: theme.colors.text,
-              border: `1px solid ${theme.colors.primary.main}`,
-              borderRadius: theme.components.mui.button.root.borderRadius,
-              padding: "10px",
+            sx={{
+              marginBottom: theme.spacing(2),
+              "& .MuiOutlinedInput-root": {
+                backgroundColor: theme.colors.background,
+                color: theme.colors.text,
+              },
             }}
           />
-          <input
+          <TextField
+            fullWidth
+            label="Пароль"
             type="password"
-            placeholder="Пароль"
+            variant="outlined"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{
-              backgroundColor: theme.colors.background,
-              color: theme.colors.text,
-              border: `1px solid ${theme.colors.primary.main}`,
-              borderRadius: theme.components.mui.button.root.borderRadius,
-              padding: "10px",
+            sx={{
+              marginBottom: theme.spacing(2),
+              "& .MuiOutlinedInput-root": {
+                backgroundColor: theme.colors.background,
+                color: theme.colors.text,
+              },
             }}
           />
-          <button
+          <Button
             type="submit"
-            style={{
-              backgroundColor: theme.colors.primary.main,
-              color: theme.colors.text,
-              borderRadius: theme.components.mui.button.root.borderRadius,
-              padding: "10px",
-              textTransform: theme.components.mui.button.root.textTransform as
-                | "none"
-                | "capitalize"
-                | "uppercase"
-                | "lowercase"
-                | "inherit", // Явне приведення типу
-              fontFamily: theme.typography.fontFamily,
+            fullWidth
+            variant="contained"
+            sx={{
+              backgroundColor: theme.colors.primary.primary50,
+              color: theme.colors.secondary.secondary5,
+              borderRadius: theme.components.mui.button.big.borderRadius,
+              padding: theme.spacing(2),
+              "&:hover": {
+                backgroundColor: theme.colors.primary.primary60,
+              },
             }}
           >
             Увійти
-          </button>
-          {error && <p style={{ color: theme.colors.error.main }}>{error}</p>}
-          <p className="message">
-            Ще не зареєстровані? <a href="/register">Створити акаунт</a>
-          </p>
+          </Button>
+          {error && (
+            <Typography
+              variant="body2"
+              sx={{
+                color: theme.colors.error.error,
+                marginTop: theme.spacing(2),
+                textAlign: "center",
+                justifyContent: "center",
+                display: "flex",
+              }}
+            >
+              {error}
+            </Typography>
+          )}
         </form>
-      </div>
-    </div>
+      </Paper>
+    </Box>
   );
 };
 

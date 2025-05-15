@@ -1,45 +1,53 @@
 import React from "react";
+import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { useTheme } from "../../providers/theme/ThemeProvider";
 
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header
-      style={{
-        backgroundColor: theme.colors.primary.main,
+    <AppBar
+      position="static"
+      sx={{
+        backgroundColor: theme.colors.secondary.secondary10,
         color: theme.colors.text,
-        padding: theme.spacing(4),
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <h1
-        style={{
-          fontFamily: theme.typography.fontFamily,
-          fontSize: "1.5rem",
-          margin: 0,
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: theme.spacing(2),
         }}
       >
-        Вхід до системи
-      </h1>
-      <button
-        onClick={toggleTheme}
-        style={{
-          backgroundColor: theme.colors.secondary.main,
-          color: theme.colors.text,
-          border: "none",
-          borderRadius: theme.components.mui.button.root.borderRadius,
-          padding: "8px 16px",
-          cursor: "pointer",
-          fontFamily: theme.typography.fontFamily,
-        }}
-      >
-        Змінити тему
-      </button>
-    </header>
+        <Typography
+          variant="h6"
+          sx={{
+            fontFamily: theme.typography.fontFamily,
+            fontSize: "1.5rem",
+          }}
+        >
+          Вхід до системи
+        </Typography>
+        <Button
+          onClick={toggleTheme}
+          variant="contained"
+          sx={{
+            backgroundColor: theme.colors.secondary.secondary10,
+            color: theme.colors.text,
+            borderRadius: theme.components.mui.button.big.borderRadius,
+            padding: "8px 16px",
+            "&:hover": {
+              backgroundColor: theme.colors.secondary.secondary20,
+            },
+          }}
+        >
+          Змінити тему
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 };
 

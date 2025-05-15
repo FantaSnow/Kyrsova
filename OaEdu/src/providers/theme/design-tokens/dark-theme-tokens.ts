@@ -10,7 +10,7 @@ export const darkThemeTokens = {
   components: {
     ...tokens.components,
     mui: {
-      button: tokens.components.mui.button.dark,
+      button: tokens.components.mui.button.light,
       textField: tokens.components.mui.textField.dark,
       appBar: tokens.components.mui.appBar.dark,
       autocomplete: tokens.components.mui.autocomplete.dark,

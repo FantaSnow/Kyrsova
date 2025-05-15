@@ -3,7 +3,6 @@ import { loadingButtonStyles } from "./LoadingButton";
 import { palette } from "./Pallete";
 
 import { lightButtonStyles } from "./Mui/Button/Light";
-import { darkButtonStyles } from "./Mui/Button/Dark";
 import { lightTextFieldStyles } from "./Mui/TextField/Light";
 import { darkTextFieldStyles } from "./Mui/TextField/Dark";
 import { lightAppBarStyles } from "./Mui/AppBar/Light";
@@ -33,7 +32,6 @@ export const tokens = {
     mui: {
       button: {
         light: lightButtonStyles,
-        dark: darkButtonStyles,
       },
       textField: {
         light: lightTextFieldStyles,

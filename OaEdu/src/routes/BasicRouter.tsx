@@ -8,7 +8,6 @@ import ProtectedRoute from "./ProtectedRoute";
 const BasicRouter: React.FC = () => {
   return (
     <Routes>
-      {/* Обгортаємо Login у Layout */}
       <Route
         path="/login"
         element={
@@ -18,7 +17,6 @@ const BasicRouter: React.FC = () => {
         }
       />
 
-      {/* Захищені маршрути */}
       <Route
         element={
           <Layout>
