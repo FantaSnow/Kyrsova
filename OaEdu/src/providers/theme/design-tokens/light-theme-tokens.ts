@@ -1,5 +1,5 @@
 import type { ThemeOptions } from "@mui/material";
-import { buttonLightOverrides } from "./Mui/Button/buttonLight";
+import { buttonOverrides } from "./Mui/Button/buttonOverrides";
 import { typography } from "./Mui/Typography/typography";
 import { paletteLight } from "./Mui/Palette/paletteLight";
 
@@ -7,6 +7,6 @@ export const lightThemeToken: ThemeOptions = {
   palette: paletteLight,
   typography,
   components: {
-    ...buttonLightOverrides,
+    ...buttonOverrides,
   },
 };

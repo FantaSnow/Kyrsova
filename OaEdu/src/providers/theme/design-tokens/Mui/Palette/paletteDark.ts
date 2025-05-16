@@ -3,18 +3,18 @@ import type { ThemeOptions } from "@mui/material";
 export const paletteDark: ThemeOptions["palette"] = {
   mode: "dark",
   primary: {
-    main: "#8E5C36",
-    primary5: "#2D211A",
-    primary10: "#543726",
-    primary20: "#6B432A",
-    primary30: "#8E5C36",
-    primary40: "#B67D4B",
-    primary50: "#C99C5A",
-    primary60: "#D7B87A",
-    primary70: "#E9DCB7",
-    primary80: "#F1E8D0",
-    primary90: "#F6F1E3",
-    primary100: "#F9F7F3",
+    main: "#6B432A",
+    primary5: "#342116",
+    primary10: "#62432C",
+    primary20: "#785034",
+    primary30: "#956339",
+    primary40: "#B37C43",
+    primary50: "#C0904F",
+    primary60: "#CBA76C",
+    primary70: "#E0CDA5",
+    primary80: "#E9DDBF",
+    primary90: "#E9DDBF",
+    primary100: "#FBF9F1",
   },
   secondary: {
     main: "#424242",
@@ -41,6 +41,5 @@ export const paletteDark: ThemeOptions["palette"] = {
   },
   text: {
     primary: "#EFEAD2",
-    secondary: "#342116",
   },
 };
