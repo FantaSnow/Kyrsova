@@ -41,5 +41,6 @@ export const paletteLight: ThemeOptions["palette"] = {
   },
   text: {
     primary: "#342116",
+    secondary: "#593D2A",
   },
 };

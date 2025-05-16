@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers/AuthContext";
-import { Box, Button, TextField, Typography, Paper } from "@mui/material";
+import { Box, TextField, Typography, Paper } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const Login: React.FC = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const { login: authLogin } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setLoading(true);
     try {
       const success = await authLogin(login, password);
       if (success) {
@@ -23,6 +26,7 @@ const Login: React.FC = () => {
     } catch (err) {
       setError("Помилка під час входу. Спробуйте пізніше.");
     }
+    setLoading(false);
   };
 
   return (
@@ -71,15 +75,19 @@ const Login: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             sx={{ marginBottom: 2 }}
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ padding: 1.5 }}
-          >
-            Увійти
-          </Button>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <LoadingButton
+              type="submit"
+              fullWidth
+              size="large"
+              variant="contained"
+              color="primary"
+              sx={{ padding: 1.5 }}
+              loading={loading}
+            >
+              Увійти
+            </LoadingButton>
+          </Box>
           {error && (
             <Typography
               variant="body2"

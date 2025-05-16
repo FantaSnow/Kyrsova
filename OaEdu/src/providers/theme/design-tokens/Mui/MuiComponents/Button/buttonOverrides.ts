@@ -12,6 +12,13 @@ export const buttonOverrides: ThemeOptions["components"] = {
         alignItems: "center",
         gap: 10,
         flexShrink: 0,
+        boxShadow: "none",
+        "&:hover": {
+          boxShadow: "none",
+        },
+        "&:active": {
+          boxShadow: "none",
+        },
       },
     },
     variants: [

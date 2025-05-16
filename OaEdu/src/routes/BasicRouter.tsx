@@ -25,6 +25,7 @@ const BasicRouter: React.FC = () => {
         }
       >
         <Route path="/HomePage" element={<HomePage />} />
+        <Route path="/news" element={<HomePage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/login" />} />

@@ -41,5 +41,6 @@ export const paletteDark: ThemeOptions["palette"] = {
   },
   text: {
     primary: "#EFEAD2",
+    secondary: "#E1D5A7",
   },
 };

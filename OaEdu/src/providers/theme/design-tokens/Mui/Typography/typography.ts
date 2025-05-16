@@ -19,7 +19,6 @@ export const typography = {
     lineHeight: "132%",
     fontWeight: 700,
   },
-
   bodyL: {
     fontSize: "22px",
     lineHeight: "144%",
