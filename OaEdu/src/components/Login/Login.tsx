@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers/AuthContext";
-import { useTheme } from "../../providers/theme/ThemeProvider";
-import { Box, Button, TextField, Typography, Paper } from "@mui/material";
+import { Box, TextField, Typography, Paper } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const Login: React.FC = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const { login: authLogin } = useAuth();
-  const { theme } = useTheme();
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setLoading(true);
     try {
       const success = await authLogin(login, password);
       if (success) {
@@ -25,14 +26,14 @@ const Login: React.FC = () => {
     } catch (err) {
       setError("Помилка під час входу. Спробуйте пізніше.");
     }
+    setLoading(false);
   };
 
   return (
     <Box
       sx={{
-        backgroundColor: theme.colors.background,
-        color: theme.colors.text,
-        fontFamily: theme.typography.fontFamily,
+        backgroundColor: "background.default",
+        color: "text.primary",
         minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
@@ -42,15 +43,15 @@ const Login: React.FC = () => {
       <Paper
         elevation={3}
         sx={{
-          padding: theme.spacing(4),
-          maxWidth: "400px",
+          padding: 4,
+          maxWidth: 400,
           width: "100%",
         }}
       >
         <Typography
           variant="h4"
           sx={{
-            marginBottom: theme.spacing(2),
+            marginBottom: 2,
             textAlign: "center",
           }}
         >
@@ -63,13 +64,7 @@ const Login: React.FC = () => {
             variant="outlined"
             value={login}
             onChange={(e) => setLogin(e.target.value)}
-            sx={{
-              marginBottom: theme.spacing(2),
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: theme.colors.background,
-                color: theme.colors.text,
-              },
-            }}
+            sx={{ marginBottom: 2 }}
           />
           <TextField
             fullWidth
@@ -78,39 +73,28 @@ const Login: React.FC = () => {
             variant="outlined"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            sx={{
-              marginBottom: theme.spacing(2),
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: theme.colors.background,
-                color: theme.colors.text,
-              },
-            }}
+            sx={{ marginBottom: 2 }}
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{
-              backgroundColor: theme.colors.primary.primary50,
-              color: theme.colors.secondary.secondary5,
-              borderRadius: theme.components.mui.button.big.borderRadius,
-              padding: theme.spacing(2),
-              "&:hover": {
-                backgroundColor: theme.colors.primary.primary60,
-              },
-            }}
-          >
-            Увійти
-          </Button>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <LoadingButton
+              type="submit"
+              fullWidth
+              size="large"
+              variant="contained"
+              color="primary"
+              sx={{ padding: 1.5 }}
+              loading={loading}
+            >
+              Увійти
+            </LoadingButton>
+          </Box>
           {error && (
             <Typography
               variant="body2"
+              color="error"
               sx={{
-                color: theme.colors.error.error,
-                marginTop: theme.spacing(2),
+                marginTop: 2,
                 textAlign: "center",
-                justifyContent: "center",
-                display: "flex",
               }}
             >
               {error}
