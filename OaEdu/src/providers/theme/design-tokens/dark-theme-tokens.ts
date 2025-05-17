@@ -5,6 +5,7 @@ import { typography } from "./Mui/Typography/typography";
 import { toolBarOverrides } from "./Mui/MuiComponents/ToolBar/toolBarOverrides";
 import { paletteDark } from "./Mui/Palette/paletteDark";
 import { navLinkOverrides } from "./Mui/MuiComponents/NavLink/navLinkOverrides";
+import { textFieldOverrides } from "./Mui/MuiComponents/TextField/textFieldOverrides";
 
 export const darkThemeToken: ThemeOptions = {
   palette: paletteDark,
@@ -14,5 +15,6 @@ export const darkThemeToken: ThemeOptions = {
     ...appBarOverrides,
     ...toolBarOverrides,
     ...navLinkOverrides,
+    ...textFieldOverrides,
   },
 };

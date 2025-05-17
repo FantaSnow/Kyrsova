@@ -8,14 +8,7 @@ import ProtectedRoute from "./ProtectedRoute";
 const BasicRouter: React.FC = () => {
   return (
     <Routes>
-      <Route
-        path="/login"
-        element={
-          <Layout>
-            <Login />
-          </Layout>
-        }
-      />
+      <Route path="/Login" element={<Login />} />
 
       <Route
         element={

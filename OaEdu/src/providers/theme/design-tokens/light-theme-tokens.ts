@@ -5,6 +5,7 @@ import { typography } from "./Mui/Typography/typography";
 import { toolBarOverrides } from "./Mui/MuiComponents/ToolBar/toolBarOverrides";
 import { paletteLight } from "./Mui/Palette/paletteLight";
 import { navLinkOverrides } from "./Mui/MuiComponents/NavLink/navLinkOverrides";
+import { textFieldOverrides } from "./Mui/MuiComponents/TextField/textFieldOverrides";
 
 export const lightThemeToken: ThemeOptions = {
   palette: paletteLight,
@@ -14,5 +15,6 @@ export const lightThemeToken: ThemeOptions = {
     ...appBarOverrides,
     ...toolBarOverrides,
     ...navLinkOverrides,
+    ...textFieldOverrides,
   },
 };
