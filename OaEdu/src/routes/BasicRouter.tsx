@@ -4,6 +4,7 @@ import Layout from "../components/leyouts/Layout";
 import Login from "../components/Login/Login";
 import HomePage from "../features/HomePage/HomePage";
 import ProtectedRoute from "./ProtectedRoute";
+import NotFound from "../components/NotFound/NotFound";
 
 const BasicRouter: React.FC = () => {
   return (
@@ -21,7 +22,7 @@ const BasicRouter: React.FC = () => {
         <Route path="/news" element={<HomePage />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/login" />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
