@@ -21,7 +21,7 @@ const Login: React.FC = () => {
     try {
       const success = await authLogin(login, password);
       if (success) {
-        navigate("/");
+        navigate("/HomePage");
       } else {
         setError("Не вдалося увійти. Перевірте логін або пароль.");
       }
