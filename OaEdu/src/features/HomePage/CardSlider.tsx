@@ -70,7 +70,7 @@ const CardSlider: React.FC<CardSliderProps> = ({ cards }) => {
   return (
     <Box
       sx={{
-        width: "100%", // було "100vw"
+        width: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

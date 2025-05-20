@@ -12,21 +12,14 @@ const BasicRouter: React.FC = () => {
       <Route path="/Login" element={<Login />} />
 
       <Route
-        path="/HomePage"
-        element={
-          <Layout>
-            <HomePage />
-          </Layout>
-        }
-      />
-
-      <Route
         element={
           <Layout>
             <ProtectedRoute />
           </Layout>
         }
       >
+        <Route path="/HomePage" element={<HomePage />} />
+
         <Route path="/news" element={<HomePage />} />
       </Route>
 

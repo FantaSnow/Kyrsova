@@ -12,7 +12,7 @@ const NotFound: React.FC = () => {
   return (
     <Box
       sx={{
-        width: "100%", // було "100vw"
+        width: "100%",
         height: "100vh",
         bgcolor: "primary.primary30",
         position: "relative",

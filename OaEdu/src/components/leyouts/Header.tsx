@@ -44,7 +44,7 @@ const Header: React.FC = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            width: "100%", // було "100vw"
+            width: "100%",
             justifyContent: "space-evenly",
             boxSizing: "border-box",
           }}
