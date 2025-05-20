@@ -2,22 +2,12 @@ import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/icons/404.svg?react";
-import { paletteLight } from "../../providers/theme/design-tokens/Mui/Palette/paletteLight"; // Додаємо імпорт
+import { getPaletteCssVars } from "../../utils/getPaletteCssVars";
 
 const NotFound: React.FC = () => {
   const navigate = useNavigate();
 
-  const primaryPalette = paletteLight?.primary
-    ? (paletteLight.primary as Record<string, string>)
-    : {};
-
-  const iconColors = Object.entries(primaryPalette).reduce(
-    (acc, [key, value]) => ({
-      ...acc,
-      [`--primary-${key}`]: value,
-    }),
-    {}
-  );
+  const iconColors = getPaletteCssVars();
 
   return (
     <Box
@@ -54,7 +44,7 @@ const NotFound: React.FC = () => {
           sx={{
             fontSize: { xs: 62, md: 96 },
             fontWeight: 700,
-            fontFamily: "Poppins",
+            fontFamily: "'poppins', sans-serif",
             lineHeight: { xs: "72px", md: "96px" },
             letterSpacing: 0,
             textAlign: "left",
@@ -71,8 +61,8 @@ const NotFound: React.FC = () => {
             textAlign: "left",
             fontSize: { xs: 16, md: 30 },
             fontWeight: 700,
-            fontFamily: "Poppins",
-            lineHeight: { xs: "24px", md: "34.56px" },
+            fontFamily: "'poppins', sans-serif",
+            lineHeight: { md: "34.56px" },
           }}
         >
           Ми поки не знаємо в чому проблема, <br /> але скоро це пофіксимо
@@ -86,9 +76,9 @@ const NotFound: React.FC = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: { xs: 220, md: 500 },
+            fontSize: { xs: 200, md: 350 },
             fontWeight: 700,
-            fontFamily: "Poppins",
+            fontFamily: "'poppins', sans-serif",
             lineHeight: 1,
             textAlign: "center",
             overflow: "hidden",
