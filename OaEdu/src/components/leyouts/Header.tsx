@@ -38,13 +38,15 @@ const Header: React.FC = () => {
   };
 
   return (
-    <AppBar position="fixed">
-      <Toolbar disableGutters>
+    <AppBar position="relative">
+      <Toolbar disableGutters style={{ width: "100%" }}>
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: { md: 10, lg: 15, xl: 30 },
+            width: "100%", // було "100vw"
+            justifyContent: "space-evenly",
+            boxSizing: "border-box",
           }}
         >
           {/* LOGO */}
@@ -52,8 +54,11 @@ const Header: React.FC = () => {
             sx={{
               color: "text.primary",
               display: "flex",
+              justifyContent: "center",
+
               alignItems: "center",
               gap: 2,
+              width: "20%",
             }}
           >
             <Logo />
@@ -70,8 +75,9 @@ const Header: React.FC = () => {
           <Box
             sx={{
               display: "flex",
+              justifyContent: "center",
+              width: "40%",
               gap: 8,
-              ml: 6,
               "& .active": {
                 borderBottom: "2px solid",
                 borderColor: "text.primary",
@@ -115,7 +121,15 @@ const Header: React.FC = () => {
           </Box>
 
           {/* Profile */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              width: "20%",
+              justifyContent: "center",
+            }}
+          >
             <Box
               sx={{
                 textAlign: "right",

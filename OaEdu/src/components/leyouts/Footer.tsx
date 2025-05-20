@@ -1,4 +1,4 @@
-import { Box, Typography, Stack, IconButton } from "@mui/material";
+import { Box, Typography, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import GoogleIcon from "../../assets/icons/google.svg?react";
 import SocialsIcon from "../../assets/icons/socials.svg?react";
@@ -14,13 +14,14 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        width: "100wh",
+        width: "100%", // було "100vw"
         bgcolor: "primary.primary20",
         color: "text.primary",
         py: 4,
         px: { xs: 2, md: 8 },
         position: "relative",
         overflow: "hidden",
+        boxSizing: "border-box",
       }}
     >
       <Stack

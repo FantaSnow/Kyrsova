@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers/AuthContext";
-import { Box, Typography, TextField } from "@mui/material";
+import { Box, Typography, TextField, IconButton } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import LoginPageImg from "../../assets/icons/LoginPage.png";
+import { useTheme } from "../../providers/theme/ThemeProvider";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const Login: React.FC = () => {
   const [login, setLogin] = useState("");
@@ -12,6 +15,7 @@ const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const { login: authLogin } = useAuth();
   const navigate = useNavigate();
+  const { mode, toggleTheme } = useTheme();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,8 +44,27 @@ const Login: React.FC = () => {
         alignItems: "center",
         justifyContent: "left",
         overflow: "hidden",
+        position: "relative",
       }}
     >
+      {/* Theme Switcher */}
+      <IconButton
+        aria-label="toggle theme"
+        onClick={toggleTheme}
+        sx={{
+          position: "fixed",
+          top: 24,
+          right: 24,
+          zIndex: 1201,
+          bgcolor: "background.paper",
+          boxShadow: 2,
+          "&:hover": { bgcolor: "background.default" },
+        }}
+        color="primary"
+      >
+        {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+      </IconButton>
+
       <Box
         sx={{
           width: { xs: "0", md: "50vw" },

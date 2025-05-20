@@ -1,5 +1,6 @@
 export const typography = {
   fontFamily: "'Poppins', sans-serif",
+
   h1: {
     fontSize: "44px",
     lineHeight: "128%",
