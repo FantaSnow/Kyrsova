@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Layout from "../components/leyouts/Layout";
 import Login from "../components/Login/Login";
 import HomePage from "../features/HomePage/HomePage";
@@ -12,13 +12,21 @@ const BasicRouter: React.FC = () => {
       <Route path="/Login" element={<Login />} />
 
       <Route
+        path="/HomePage"
+        element={
+          <Layout>
+            <HomePage />
+          </Layout>
+        }
+      />
+
+      <Route
         element={
           <Layout>
             <ProtectedRoute />
           </Layout>
         }
       >
-        <Route path="/HomePage" element={<HomePage />} />
         <Route path="/news" element={<HomePage />} />
       </Route>
 

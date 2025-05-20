@@ -27,8 +27,6 @@ const user = {
 const Header: React.FC = () => {
   const { mode, toggleTheme } = useTheme();
   const { logout } = useAuth();
-
-  // Додаємо стан для меню
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 

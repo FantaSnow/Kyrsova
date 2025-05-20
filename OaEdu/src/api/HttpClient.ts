@@ -9,7 +9,7 @@ export class HttpClient {
   constructor(configs: AxiosRequestConfig) {
     this.axiosInstance = axios.create({
       baseURL: configs.baseURL || "http://20.19.91.105:8000",
-      timeout: configs.timeout || 20000,
+      timeout: configs.timeout || 30000,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

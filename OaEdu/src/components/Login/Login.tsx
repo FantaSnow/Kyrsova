@@ -4,7 +4,6 @@ import { useAuth } from "../../providers/AuthContext";
 import { Box, Typography, TextField } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import LoginPageImg from "../../assets/icons/LoginPage.png";
-// Імпортуй кастомний TextField
 
 const Login: React.FC = () => {
   const [login, setLogin] = useState("");
