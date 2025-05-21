@@ -10,7 +10,14 @@ const BasicRouter: React.FC = () => {
   return (
     <Routes>
       <Route path="/Login" element={<Login />} />
-
+    <Route
+        path="/HomePage"
+        element={
+          <Layout>
+            <HomePage />
+          </Layout>
+        }
+      />
       <Route
         element={
           <Layout>

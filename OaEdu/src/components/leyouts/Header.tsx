@@ -58,7 +58,7 @@ const Header: React.FC = () => {
 
               alignItems: "center",
               gap: 2,
-              width: "20%",
+              width: "30%",
             }}
           >
             <Logo />
@@ -76,8 +76,8 @@ const Header: React.FC = () => {
             sx={{
               display: "flex",
               justifyContent: "center",
-              width: "40%",
-              gap: 8,
+              width: "50%",
+              gap: {xs: 2, lg: 4, xl: 8 },
               "& .active": {
                 borderBottom: "2px solid",
                 borderColor: "text.primary",
@@ -126,14 +126,14 @@ const Header: React.FC = () => {
               display: "flex",
               alignItems: "center",
               gap: 1,
-              width: "20%",
+              width: "30%",
               justifyContent: "center",
             }}
           >
             <Box
               sx={{
                 textAlign: "right",
-                display: "flex",
+                display: { xs: "none", lg: "flex" }, // тільки на lg і більше
                 flexDirection: "column",
               }}
             >

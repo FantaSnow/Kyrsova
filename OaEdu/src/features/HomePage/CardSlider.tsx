@@ -51,21 +51,11 @@ const getCardStyle = (idx: number) => {
 };
 
 const CardSlider: React.FC<CardSliderProps> = ({ cards }) => {
-  const [center, setCenter] = useState(2);
-  const isNarrow = useMediaQuery("(max-width:1550px)");
+  const [center, setCenter] = useState(0);
+  const isNarrow = useMediaQuery("(max-width:1450px)");
 
   const visibleCount = isNarrow ? 3 : 5;
   const offset = Math.floor(visibleCount / 2);
-
-  const visible = [];
-  for (let i = -offset; i <= offset; i++) {
-    const idx = center + i;
-    if (idx >= 0 && idx < cards.length) {
-      visible.push({ ...cards[idx], rel: i, key: idx });
-    } else {
-      visible.push(null);
-    }
-  }
 
   return (
     <Box
@@ -86,14 +76,23 @@ const CardSlider: React.FC<CardSliderProps> = ({ cards }) => {
           width: "100%",
           justifyContent: "center",
           alignItems: "center",
+          position: "relative",
         }}
       >
-        {visible.map((card, i) =>
-          card ? (
+        {cards.map((card, idx) => {
+          const rel = idx - center;
+          const isVisible = Math.abs(rel) <= offset;
+          return (
             <Box
-              key={card.key}
+              key={idx}
               sx={{
-                ...getCardStyle(card.rel),
+                ...(isVisible
+                  ? getCardStyle(rel)
+                  : {
+                      opacity: 0,
+                      pointerEvents: "none",
+                      position: "absolute",
+                    }),
                 borderRadius: "50px",
                 bgcolor: "secondary.secondary10",
                 display: "flex",
@@ -102,7 +101,6 @@ const CardSlider: React.FC<CardSliderProps> = ({ cards }) => {
                 alignItems: "center",
                 justifyContent: "flex-start",
                 transition: "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)",
-                position: "relative",
                 overflow: "hidden",
               }}
             >
@@ -123,10 +121,8 @@ const CardSlider: React.FC<CardSliderProps> = ({ cards }) => {
                 {card.role}
               </Typography>
             </Box>
-          ) : (
-            <Box key={i} sx={{ width: 160, height: 200, opacity: 0 }} />
-          )
-        )}
+          );
+        })}
       </Box>
       {/* Кнопки пагінації */}
       <Box
@@ -141,17 +137,15 @@ const CardSlider: React.FC<CardSliderProps> = ({ cards }) => {
       >
         <Button
           variant="contained"
-          onClick={() => setCenter((c) => Math.max(offset, c - 1))}
-          disabled={center <= offset}
+          onClick={() => setCenter((c) => Math.max(0, c - 1))}
+          disabled={center <= 0}
         >
           ←
         </Button>
         <Button
           variant="contained"
-          onClick={() =>
-            setCenter((c) => Math.min(cards.length - 1 - offset, c + 1))
-          }
-          disabled={center >= cards.length - 1 - offset}
+          onClick={() => setCenter((c) => Math.min(cards.length - 1, c + 1))}
+          disabled={center >= cards.length - 1}
         >
           →
         </Button>
