@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers/AuthContext";
-import { Box, TextField, Typography, Paper } from "@mui/material";
+import { Box, Typography, TextField, IconButton } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
+import LoginPageImg from "../../assets/icons/LoginPage.png";
+import { useTheme } from "../../providers/theme/ThemeProvider";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const Login: React.FC = () => {
   const [login, setLogin] = useState("");
@@ -11,6 +15,7 @@ const Login: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const { login: authLogin } = useAuth();
   const navigate = useNavigate();
+  const { mode, toggleTheme } = useTheme();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +24,7 @@ const Login: React.FC = () => {
     try {
       const success = await authLogin(login, password);
       if (success) {
-        navigate("/");
+        navigate("/HomePage");
       } else {
         setError("Не вдалося увійти. Перевірте логін або пароль.");
       }
@@ -32,57 +37,156 @@ const Login: React.FC = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "background.default",
-        color: "text.primary",
-        minHeight: "100vh",
+        width: "100vw",
+        height: "100vh",
+        bgcolor: "secondary.secondary10",
         display: "flex",
-        justifyContent: "center",
         alignItems: "center",
+        justifyContent: "left",
+        overflow: "hidden",
+        position: "relative",
       }}
     >
-      <Paper
-        elevation={3}
+      {/* Theme Switcher */}
+      <IconButton
+        aria-label="toggle theme"
+        onClick={toggleTheme}
         sx={{
-          padding: 4,
-          maxWidth: 400,
-          width: "100%",
+          position: "fixed",
+          top: 24,
+          right: 24,
+          zIndex: 1201,
+          bgcolor: "background.paper",
+          boxShadow: 2,
+          "&:hover": { bgcolor: "background.default" },
+        }}
+        color="primary"
+      >
+        {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon />}
+      </IconButton>
+
+      <Box
+        sx={{
+          width: { xs: "0", md: "50vw" },
+          height: "80vh",
+          minWidth: { md: 400 },
+          display: { xs: "none", md: "flex" },
+          alignItems: "center",
+          justifyContent: "flex-start",
+          overflow: "hidden",
         }}
       >
-        <Typography
-          variant="h4"
+        <img
+          src={LoginPageImg}
+          alt="Login"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "right",
+            display: "block",
+          }}
+        />
+      </Box>
+
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 3,
+        }}
+      >
+        <Box
           sx={{
-            marginBottom: 2,
-            textAlign: "center",
+            width: "40%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 1.5,
           }}
         >
-          Вхід
-        </Typography>
-        <form onSubmit={handleLogin}>
-          <TextField
-            fullWidth
-            label="Логін"
-            variant="outlined"
-            value={login}
-            onChange={(e) => setLogin(e.target.value)}
-            sx={{ marginBottom: 2 }}
-          />
-          <TextField
-            fullWidth
-            label="Пароль"
-            type="password"
-            variant="outlined"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            sx={{ marginBottom: 2 }}
-          />
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Typography variant="h1" color="text.primary">
+            Welcome Back
+          </Typography>
+          <Typography variant="bodyM" color="text.primary">
+            Всі права захищені кабом
+          </Typography>
+        </Box>
+
+        <Box
+          component="form"
+          onSubmit={handleLogin}
+          sx={{
+            width: "40%",
+            display: "flex",
+            flexDirection: "column",
+            gap: 5,
+            alignItems: "center",
+          }}
+        >
+          <Box
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: 3,
+            }}
+          >
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                gap: 1,
+              }}
+            >
+              <Typography variant="bodyM" color="text.primary">
+                Пошта
+              </Typography>
+              <TextField
+                fullWidth
+                placeholder="Введіть свою пошту"
+                variant="outlined"
+                value={login}
+                onChange={(e) => setLogin(e.target.value)}
+              />
+            </Box>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                gap: 1,
+              }}
+            >
+              <Typography variant="bodyM" color="text.primary">
+                Пароль
+              </Typography>
+              <TextField
+                fullWidth
+                placeholder="Введіть свій пароль"
+                type="password"
+                variant="outlined"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Box>
+          </Box>
+          <Box
+            sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+          >
             <LoadingButton
               type="submit"
-              fullWidth
-              size="large"
               variant="contained"
               color="primary"
-              sx={{ padding: 1.5 }}
+              size="large"
+              sx={{
+                typography: "buttonL",
+              }}
               loading={loading}
             >
               Увійти
@@ -100,8 +204,8 @@ const Login: React.FC = () => {
               {error}
             </Typography>
           )}
-        </form>
-      </Paper>
+        </Box>
+      </Box>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../assets/icons/Logo.svg?react";
 import {
   AppBar,
@@ -8,11 +8,15 @@ import {
   Avatar,
   IconButton,
   Link as MuiLink,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import { useTheme } from "../../providers/theme/ThemeProvider";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../providers/AuthContext";
 
 const user = {
   name: "Строзюк Роман Володимирович",
@@ -22,38 +26,70 @@ const user = {
 
 const Header: React.FC = () => {
   const { mode, toggleTheme } = useTheme();
+  const { logout } = useAuth();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <AppBar position="fixed">
-      <Toolbar disableGutters>
+    <AppBar position="relative">
+      <Toolbar disableGutters style={{ width: "100%" }}>
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: { md: 10, lg: 15, xl: 30 },
+            width: "100%",
+            justifyContent: "space-evenly",
+            boxSizing: "border-box",
           }}
         >
           {/* LOGO */}
-          <Logo />
+          <Box
+            sx={{
+              color: "text.primary",
+              display: "flex",
+              justifyContent: "center",
+
+              alignItems: "center",
+              gap: 2,
+              width: "20%",
+            }}
+          >
+            <Logo />
+            <IconButton onClick={toggleTheme}>
+              {mode === "light" ? (
+                <DarkModeIcon sx={{ color: "text.primary", fontSize: 28 }} />
+              ) : (
+                <LightModeIcon sx={{ color: "text.primary", fontSize: 28 }} />
+              )}
+            </IconButton>
+          </Box>
 
           {/* NAV-BUTTONS */}
           <Box
             sx={{
               display: "flex",
+              justifyContent: "center",
+              width: "40%",
               gap: 8,
-              ml: 6,
               "& .active": {
                 borderBottom: "2px solid",
-                borderColor: "text.main",
+                borderColor: "text.primary",
               },
               "& a": {
-                color: "text.main",
+                color: "text.primary",
                 textDecoration: "none",
                 transition: "color 0.2s, border-color 0.2s",
                 "&:hover": {
-                  color: "text.main",
+                  color: "text.primary",
                   borderBottom: "2px solid",
-                  borderColor: "text.main",
+                  borderColor: "text.primary",
                 },
                 "&:active": {
                   color: "text.secondary",
@@ -85,7 +121,15 @@ const Header: React.FC = () => {
           </Box>
 
           {/* Profile */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              width: "20%",
+              justifyContent: "center",
+            }}
+          >
             <Box
               sx={{
                 textAlign: "right",
@@ -96,13 +140,40 @@ const Header: React.FC = () => {
               <Typography variant="bodyS">{user.name}</Typography>
               <Typography variant="bodyS">{user.email}</Typography>
             </Box>
-            <IconButton onClick={toggleTheme}>
-              {mode === "light" ? (
-                <DarkModeIcon sx={{ color: "text.primary", fontSize: 28 }} />
-              ) : (
-                <LightModeIcon sx={{ color: "text.primary", fontSize: 28 }} />
-              )}
+            <IconButton onClick={handleMenuOpen}>
+              <KeyboardArrowDownIcon />
             </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleMenuClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              PaperProps={{
+                sx: {
+                  bgcolor: "primary.primary20",
+                  mt: 3,
+                  minWidth: 120,
+                  boxShadow: "0px 2px 2px 2px #00000040",
+                },
+              }}
+            >
+              <MenuItem onClick={handleMenuClose}>Профіль</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleMenuClose();
+                  logout();
+                }}
+              >
+                Вихід
+              </MenuItem>
+            </Menu>
             <Avatar
               alt={user.name}
               src={user.avatar}

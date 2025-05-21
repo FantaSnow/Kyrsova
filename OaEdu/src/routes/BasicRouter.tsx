@@ -1,21 +1,15 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Layout from "../components/leyouts/Layout";
 import Login from "../components/Login/Login";
 import HomePage from "../features/HomePage/HomePage";
 import ProtectedRoute from "./ProtectedRoute";
+import NotFound from "../components/NotFound/NotFound";
 
 const BasicRouter: React.FC = () => {
   return (
     <Routes>
-      <Route
-        path="/login"
-        element={
-          <Layout>
-            <Login />
-          </Layout>
-        }
-      />
+      <Route path="/Login" element={<Login />} />
 
       <Route
         element={
@@ -25,10 +19,11 @@ const BasicRouter: React.FC = () => {
         }
       >
         <Route path="/HomePage" element={<HomePage />} />
+
         <Route path="/news" element={<HomePage />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/login" />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
