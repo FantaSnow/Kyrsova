@@ -1,12 +1,13 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Header from "./Header";
+import { Outlet } from "react-router-dom"; // ДОДАЙ ЦЕ
 
 interface NewsLayoutProps {
   children?: React.ReactNode;
 }
 
-const NewsLayout: React.FC<NewsLayoutProps> = ({ children }) => {
+const NewsLayout: React.FC<NewsLayoutProps> = () => {
   return (
     <Box
       sx={{
@@ -17,7 +18,9 @@ const NewsLayout: React.FC<NewsLayoutProps> = ({ children }) => {
       }}
     >
       <Header />
-      <main style={{ flex: 1 }}>{children}</main>
+      <main style={{ flex: 1 }}>
+        <Outlet />
+      </main>
     </Box>
   );
 };

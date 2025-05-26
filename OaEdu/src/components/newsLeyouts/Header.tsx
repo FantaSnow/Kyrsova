@@ -34,11 +34,12 @@ const NewsMiniHeader: React.FC = () => {
   return (
     <Box
       sx={{
+        mt: 0.5,
         position: "sticky",
         top: 0,
         zIndex: 1100,
         height: "63px",
-        bgcolor: "secondary.secondary10",
+        bgcolor: "transparent",
         display: "flex",
         transition: "transform 0.3s, opacity 0.3s",
         transform: show ? "translateY(0)" : "translateY(-100%)",

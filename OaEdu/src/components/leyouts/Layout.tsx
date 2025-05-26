@@ -10,10 +10,11 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Box
-      style={{
+      sx={{
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
+        bgcolor: "secondary.secondary10",
       }}
     >
       <Header />
