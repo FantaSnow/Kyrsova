@@ -77,9 +77,9 @@ const Header: React.FC = () => {
               display: "flex",
               justifyContent: "center",
               width: "50%",
-              gap: {xs: 2, lg: 4, xl: 8 },
+              gap: { xs: 2, lg: 4, xl: 8 },
               "& .active": {
-                borderBottom: "2px solid",
+                borderBottom: "3px solid",
                 borderColor: "text.primary",
               },
               "& a": {
@@ -88,7 +88,7 @@ const Header: React.FC = () => {
                 transition: "color 0.2s, border-color 0.2s",
                 "&:hover": {
                   color: "text.primary",
-                  borderBottom: "2px solid",
+                  borderBottom: "3px solid",
                   borderColor: "text.primary",
                 },
                 "&:active": {
@@ -133,7 +133,7 @@ const Header: React.FC = () => {
             <Box
               sx={{
                 textAlign: "right",
-                display: { xs: "none", lg: "flex" }, // тільки на lg і більше
+                display: { xs: "none", lg: "flex" },
                 flexDirection: "column",
               }}
             >

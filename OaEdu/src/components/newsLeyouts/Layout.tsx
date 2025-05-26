@@ -1,26 +1,25 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
 import Box from "@mui/material/Box";
+import Header from "./Header";
 
-interface LayoutProps {
-  children: React.ReactNode;
+interface NewsLayoutProps {
+  children?: React.ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const NewsLayout: React.FC<NewsLayoutProps> = ({ children }) => {
   return (
     <Box
-      style={{
+      sx={{
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
+        bgcolor: "secondary.secondary10",
       }}
     >
       <Header />
       <main style={{ flex: 1 }}>{children}</main>
-      <Footer />
     </Box>
   );
 };
 
-export default Layout;
+export default NewsLayout;
