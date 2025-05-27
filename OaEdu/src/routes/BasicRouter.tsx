@@ -12,6 +12,7 @@ import EventsNews from "../features/NewsPage/categories/EventsNews";
 import ScienceNews from "../features/NewsPage/categories/ScienceNews";
 import CultureNews from "../features/NewsPage/categories/CultureNews";
 import NewsDetails from "../features/NewsPage/NewsDetails";
+import SchedulePage from "../features/SchedulePage/SchedulePage";
 
 const BasicRouter: React.FC = () => {
   return (
@@ -21,6 +22,8 @@ const BasicRouter: React.FC = () => {
       {/* ProtectedRoute сторінки */}
       <Route element={<Layout />}>
         <Route path="/HomePage" element={<HomePage />} />
+        <Route path="/schedule" element={<SchedulePage />} />
+
         <Route path="/news/:category/:id" element={<NewsDetails />} />
       </Route>
 

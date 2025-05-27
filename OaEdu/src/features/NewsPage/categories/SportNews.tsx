@@ -125,7 +125,7 @@ const SportNews: React.FC = () => {
               color: theme.palette.text.primary,
               ...theme.typography.h4,
             }}
-            onClick={() => navigate(`/news/top`, { state: topNews })}
+            onClick={() => navigate(`/news/sport/top`, { state: topNews })}
           >
             Читати більше
           </Button>
@@ -154,7 +154,7 @@ const SportNews: React.FC = () => {
                 },
               },
             }}
-            onClick={() => navigate(`/news/small-${i}`, { state: news })}
+            onClick={() => navigate(`/news/sport/small-${i}`, { state: news })}
           >
             <Box
               sx={{
@@ -206,7 +206,7 @@ const SportNews: React.FC = () => {
               background: theme.palette.action.hover,
             },
           }}
-          onClick={() => navigate(`/news/${i}`, { state: news })}
+          onClick={() => navigate(`/news/sport/${i}`, { state: news })}
         >
           <Box
             sx={{

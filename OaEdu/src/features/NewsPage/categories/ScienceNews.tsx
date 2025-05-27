@@ -125,7 +125,7 @@ const ScienceNews: React.FC = () => {
               color: theme.palette.text.primary,
               ...theme.typography.h4,
             }}
-            onClick={() => navigate(`/news/top`, { state: topNews })}
+            onClick={() => navigate(`/news/science/top`, { state: topNews })}
           >
             Читати більше
           </Button>
@@ -154,7 +154,9 @@ const ScienceNews: React.FC = () => {
                 },
               },
             }}
-            onClick={() => navigate(`/news/small-${i}`, { state: news })}
+            onClick={() =>
+              navigate(`/news/science/small-${i}`, { state: news })
+            }
           >
             <Box
               sx={{
@@ -206,7 +208,7 @@ const ScienceNews: React.FC = () => {
               background: theme.palette.action.hover,
             },
           }}
-          onClick={() => navigate(`/news/${i}`, { state: news })}
+          onClick={() => navigate(`/news/science/${i}`, { state: news })}
         >
           <Box
             sx={{

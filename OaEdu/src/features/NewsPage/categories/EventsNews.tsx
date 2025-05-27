@@ -125,7 +125,7 @@ const EventsNews: React.FC = () => {
               color: theme.palette.text.primary,
               ...theme.typography.h4,
             }}
-            onClick={() => navigate(`/news/top`, { state: topNews })}
+            onClick={() => navigate(`/news/events/top`, { state: topNews })}
           >
             Читати більше
           </Button>
@@ -154,7 +154,7 @@ const EventsNews: React.FC = () => {
                 },
               },
             }}
-            onClick={() => navigate(`/news/small-${i}`, { state: news })}
+            onClick={() => navigate(`/news/events/small-${i}`, { state: news })}
           >
             <Box
               sx={{
@@ -206,7 +206,7 @@ const EventsNews: React.FC = () => {
               background: theme.palette.action.hover,
             },
           }}
-          onClick={() => navigate(`/news/${i}`, { state: news })}
+          onClick={() => navigate(`/news/events/${i}`, { state: news })}
         >
           <Box
             sx={{

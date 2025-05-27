@@ -125,7 +125,7 @@ const CultureNews: React.FC = () => {
               color: theme.palette.text.primary,
               ...theme.typography.h4,
             }}
-            onClick={() => navigate(`/news/top`, { state: topNews })}
+            onClick={() => navigate(`/news/culture/top`, { state: topNews })}
           >
             Читати більше
           </Button>
@@ -154,7 +154,9 @@ const CultureNews: React.FC = () => {
                 },
               },
             }}
-            onClick={() => navigate(`/news/small-${i}`, { state: news })}
+            onClick={() =>
+              navigate(`/news/culture/small-${i}`, { state: news })
+            }
           >
             <Box
               sx={{
@@ -206,7 +208,7 @@ const CultureNews: React.FC = () => {
               background: theme.palette.action.hover,
             },
           }}
-          onClick={() => navigate(`/news/${i}`, { state: news })}
+          onClick={() => navigate(`/news/culture/${i}`, { state: news })}
         >
           <Box
             sx={{

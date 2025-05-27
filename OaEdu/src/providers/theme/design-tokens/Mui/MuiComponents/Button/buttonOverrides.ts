@@ -127,7 +127,7 @@ export const buttonOverrides: ThemeOptions["components"] = {
       {
         props: { size: "small", variant: "contained", color: "primary" },
         style: ({ theme }) => ({
-          width: 40,
+          width: 44,
           height: 40,
           backgroundColor: theme.palette.primary.primary30,
           color: theme.palette.text.primary,
