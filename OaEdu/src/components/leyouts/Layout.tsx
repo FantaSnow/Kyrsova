@@ -2,9 +2,10 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Box from "@mui/material/Box";
+import { Outlet } from "react-router-dom";
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
@@ -18,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       }}
     >
       <Header />
-      <main style={{ flex: 1 }}>{children}</main>
+      <main style={{ flex: 1 }}>{children || <Outlet />}</main>
       <Footer />
     </Box>
   );

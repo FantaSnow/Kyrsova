@@ -1,15 +1,15 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 
-// Дані для прикладу
 const topNews = {
   image:
     "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
   title:
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "Lorem Ipsum is sim1231123123123123ply dummy text of the printing and typesetting industry.",
   description:
-    "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+    "Lorem Ipsum has b1231een the industry's standard dummy text ever since the 1500s. When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
 };
 
 const smallNews = [
@@ -60,6 +60,7 @@ const listNews = [
 
 const GeneralNews: React.FC = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
   return (
     <Box sx={{ width: "100%", maxWidth: 1200, mx: "auto", py: 3 }}>
       {/* Top news block */}
@@ -87,7 +88,19 @@ const GeneralNews: React.FC = () => {
             justifyContent: "space-between",
           }}
         >
-          <Typography variant="h3" color="text.primary" gutterBottom>
+          <Typography
+            variant="h3"
+            color="text.primary"
+            gutterBottom
+            sx={{
+              mb: 1,
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
             {topNews.title}
           </Typography>
           <Typography
@@ -112,12 +125,12 @@ const GeneralNews: React.FC = () => {
               color: theme.palette.text.primary,
               ...theme.typography.h4,
             }}
+            onClick={() => navigate(`/news/general/top`, { state: topNews })}
           >
             Читати більше
           </Button>
         </Box>
       </Box>
-
       {/* Small news grid */}
       <Box
         sx={{
@@ -128,7 +141,23 @@ const GeneralNews: React.FC = () => {
         }}
       >
         {smallNews.map((news, i) => (
-          <Box key={i} sx={{ textAlign: "left", width: "19%" }}>
+          <Box
+            key={i}
+            sx={{
+              textAlign: "left",
+              width: "19%",
+              cursor: "pointer",
+              transition: "box-shadow 0.2s, background 0.2s",
+              "&:hover": {
+                "& .small-news-title": {
+                  textDecoration: "underline",
+                },
+              },
+            }}
+            onClick={() =>
+              navigate(`/news/general/small-${i}`, { state: news })
+            }
+          >
             <Box
               sx={{
                 borderRadius: 2,
@@ -149,7 +178,12 @@ const GeneralNews: React.FC = () => {
                 }}
               />
             </Box>
-            <Typography variant="bodyS" color="text.primary">
+            <Typography
+              variant="bodyS"
+              color="text.primary"
+              className="small-news-title"
+              sx={{ transition: "text-decoration 0.2s" }}
+            >
               {news.title}
             </Typography>
           </Box>
@@ -165,7 +199,16 @@ const GeneralNews: React.FC = () => {
             gap: 2,
             mb: 3,
             alignItems: "flex-start",
+            cursor: "pointer",
+            transition: "box-shadow 0.2s, background 0.2s",
+            boxShadow: 1,
+            borderRadius: 3,
+            "&:hover": {
+              boxShadow: 6,
+              background: theme.palette.action.hover,
+            },
           }}
+          onClick={() => navigate(`/news/general/${i}`, { state: news })}
         >
           <Box
             sx={{
@@ -192,6 +235,7 @@ const GeneralNews: React.FC = () => {
               color="text.primary"
               gutterBottom
               noWrap
+              sx={{ mt: 1.5 }}
             >
               {news.title}
             </Typography>
