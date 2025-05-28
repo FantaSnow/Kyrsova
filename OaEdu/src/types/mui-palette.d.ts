@@ -57,4 +57,23 @@ declare module "@mui/material/styles" {
     success?: string;
     onError?: string;
   }
+
+  interface Palette {
+    schedule: {
+      main: string;
+      Lab?: string;
+      Prac?: string;
+      lecture?: string;
+
+    };
+  }
+  interface PaletteOptions {
+    schedule?: {
+      main: string;
+      Lab?: string;
+      Prac?: string;
+      lecture?: string;
+
+    };
+  }
 }

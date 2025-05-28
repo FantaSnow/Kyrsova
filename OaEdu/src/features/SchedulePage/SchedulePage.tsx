@@ -75,10 +75,10 @@ const lessons = [
   },
 ];
 
-const getRowColor = (type: string) => {
-  if (type === "Лекція") return "#9BF4B6";
-  if (type === "Лабораторна") return "#E2B4FF";
-  if (type === "Практика") return "#B2D8FF";
+const getRowColor = (type: string, theme: any) => {
+  if (type === "Лекція") return theme.palette.schedule.lecture;
+  if (type === "Лабораторна") return theme.palette.schedule.Lab;
+  if (type === "Практика") return theme.palette.schedule.Prac;
   return "#f0f0f0";
 };
 
@@ -213,7 +213,7 @@ const SchedulePage: React.FC = () => {
             boxShadow: "0px 4px 5px 2px #00000024",
             px: 2,
             py: 1,
-            bgcolor: "secondary.secondary5",
+            bgcolor: "secondary.secondary10",
           }}
         >
           <Table>
@@ -264,8 +264,8 @@ const SchedulePage: React.FC = () => {
                     <TableRow
                       sx={{
                         background: isEmpty
-                          ? "#f0f0f0"
-                          : getRowColor(row?.type),
+                          ? theme.palette.schedule.main
+                          : getRowColor(row?.type, theme),
                         "& .MuiTableCell-root": {
                           border: "none",
                         },
@@ -289,16 +289,13 @@ const SchedulePage: React.FC = () => {
                         >
                           {isEmpty ? (
                             header.key === "id" ? (
-                              <Typography
-                                variant="bodyM"
-                                color="text.secondary"
-                              >
+                              <Typography variant="bodyM" color="text.primary">
                                 {pairNum}
                               </Typography>
                             ) : null
                           ) : header.key === "pair" ? (
                             <Button variant="text" sx={{ minWidth: 0, p: 0 }}>
-                              <Typography variant="buttonM">
+                              <Typography variant="bodyM">
                                 {row[header.key as keyof typeof row]}
                               </Typography>
                             </Button>
@@ -337,7 +334,7 @@ const SchedulePage: React.FC = () => {
           sx={{
             display: "flex",
             gap: 3,
-            background: "#fff",
+            bgcolor: "secondary.secondary10",
             p: 2,
             borderRadius: 3,
             boxShadow: "0px 4px 5px 2px #00000024",
@@ -355,8 +352,16 @@ const SchedulePage: React.FC = () => {
                 checked={activeColumns.includes(header.key)}
                 onChange={() => handleToggleColumn(header.key)}
                 size="small"
+                sx={{
+                  color: theme.palette.primary.primary50,
+                  "&.Mui-checked": {
+                    color: theme.palette.primary.primary50,
+                  },
+                }}
               />
-              <Typography variant="bodyS">{header.label}</Typography>
+              <Typography variant="bodyS" color="text.primary">
+                {header.label}
+              </Typography>
             </Box>
           ))}
         </Box>

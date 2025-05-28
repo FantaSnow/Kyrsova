@@ -1,7 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Header from "./Header";
-import { Outlet } from "react-router-dom"; // ДОДАЙ ЦЕ
+import { Outlet } from "react-router-dom";
 
 interface NewsLayoutProps {
   children?: React.ReactNode;

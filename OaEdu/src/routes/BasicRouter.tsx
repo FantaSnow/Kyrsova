@@ -13,6 +13,8 @@ import ScienceNews from "../features/NewsPage/categories/ScienceNews";
 import CultureNews from "../features/NewsPage/categories/CultureNews";
 import NewsDetails from "../features/NewsPage/NewsDetails";
 import SchedulePage from "../features/SchedulePage/SchedulePage";
+import VolunteeringPage from "../features/VolunteeringPage/VolunteeringPage";
+import VolunteeringDetails from "../features/VolunteeringPage/VolunteeringDetails";
 
 const BasicRouter: React.FC = () => {
   return (
@@ -23,7 +25,8 @@ const BasicRouter: React.FC = () => {
       <Route element={<Layout />}>
         <Route path="/HomePage" element={<HomePage />} />
         <Route path="/schedule" element={<SchedulePage />} />
-
+        <Route path="/volunteering" element={<VolunteeringPage />} />
+        <Route path="/volunteering/:id" element={<VolunteeringDetails />} />
         <Route path="/news/:category/:id" element={<NewsDetails />} />
       </Route>
 

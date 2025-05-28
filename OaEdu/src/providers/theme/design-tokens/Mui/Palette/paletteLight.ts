@@ -35,6 +35,12 @@ export const paletteLight: ThemeOptions["palette"] = {
     success: "#00FF41",
     onError: "#FFFFFF",
   },
+  schedule: {
+    main: "#E3E3E3",
+    Lab: "#E2B4FF",
+    Prac: "#B2D8FF",
+    lecture:  "#9BF4B6",
+  },
   background: {
     default: "#fff",
     paper: "#fff",

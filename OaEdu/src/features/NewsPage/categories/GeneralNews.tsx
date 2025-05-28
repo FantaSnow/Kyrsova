@@ -198,6 +198,8 @@ const GeneralNews: React.FC = () => {
             display: "flex",
             gap: 2,
             mb: 3,
+            p: 3,
+            bgcolor: "secondary.secondary10",
             alignItems: "flex-start",
             cursor: "pointer",
             transition: "box-shadow 0.2s, background 0.2s",
