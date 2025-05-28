@@ -5,56 +5,68 @@ import { useNavigate } from "react-router-dom";
 
 const topNews = {
   image:
-    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
-  title:
-    "Lorem Ipsum is sim1231123123123123ply dummy text of the printing and typesetting industry.",
+    "https://www.oa.edu.ua/assets/images/n/2025/05/big/edelvika_visit_b.jpg",
+  title: "Навчально-практична екскурсійна поїздка на ПрАТ «Едельвіка»",
   description:
-    "Lorem Ipsum has b1231een the industry's standard dummy text ever since the 1500s. When an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+    "23 травня успішно відбулася навчально-практична екскурсійна поїздка на ПрАТ «Едельвіка» – зразкове підприємство легкої промисловості України, багаторічного стейкхолдера Острозької академії.",
 };
 
 const smallNews = [
   {
-    image: topNews.image,
-    title: "when an unknown printer took a galley of type and scrambled...",
+    image: "https://www.oa.edu.ua/assets/images/new_building_b.jpg",
+    title:
+      "Національний університет «Острозька академія» долучився до Експериментального проекту щодо надання державної допомоги на навчання дітям деяких категорій осіб, які захищали незалежність, суверенітет та територіальну цілісність України",
   },
   {
-    image: topNews.image,
-    title: "when an unknown printer took a galley of type and scrambled...",
+    image:
+      "https://www.oa.edu.ua/assets/images/n/2025/05/big/ivaschuk_senegal_b.jpg",
+    title:
+      "До Дня Африки в Острозькій академії відбулася зустріч з Почесним консулом Республіки Сенегал",
   },
   {
-    image: topNews.image,
-    title: "when an unknown printer took a galley of type and scrambled...",
+    image: "https://www.oa.edu.ua/assets/images/n/2025/05/big/ishm_week_b.jpg",
+    title:
+      "В Острозькій академії відсвяткували тиждень Інституту соціально-гуманітарного менеджменту",
   },
   {
-    image: topNews.image,
-    title: "when an unknown printer took a galley of type and scrambled...",
+    image:
+      "https://www.oa.edu.ua/assets/images/n/2025/05/big/ufu_idud_conf_b.jpg",
+    title:
+      "Міжнародна наукова конференція «Проблеми культурної ідентичності в ситуації сучасного діалогу культур»",
   },
   {
-    image: topNews.image,
-    title: "when an unknown printer took a galley of type and scrambled...",
+    image:
+      "https://www.oa.edu.ua/assets/images/n/2025/05/big/mental_health_week_b.jpg",
+    title: "Тиждень обізнаності про ментальне здоров’я в Острозькій академії",
   },
 ];
 
 const listNews = [
   {
-    image: topNews.image,
-    title: "Новина про подію",
+    image:
+      "https://www.oa.edu.ua/assets/images/n/2025/05/big/shoi_alumni_b.jpg",
+    title: "П’ятий випуск Школи освітніх інновацій в Острозькій академії",
     description:
-      "Короткий опис новини або анонс. Можна підставити будь-який текст з бекенду.",
-    meta: "2 хвилини тому",
+      "22 травня в Навчально-методичному центрі «Школа освітніх інновацій» Національного університету «Острозька академія» відбулося урочисте вручення сертифікатів про підвищення кваліфікації у викладачів вишу. Ініціатори й натхненники центру – президент НаУОА, доктор психологічних наук, професор Ігор Пасічник; проректорка з навчально-виховної роботи, докторка психологічних наук, професорка Руслана Каламаж і проректор з науково-педагогічної роботи, доктор філософських наук, професор Дмитро Шевчук. Модерувала захід керівниця Школи освітніх інновацій, кандидатка філологічних наук, доцентка Юлія Маслова.",
+    meta: "22.05.2025",
   },
   {
-    image: topNews.image,
-    title: "Ще одна новина",
+    image:
+      "https://www.oa.edu.ua/assets/images/n/2025/05/big/maryna_kobylynska_b.jpg",
+    title:
+      "В Острозькій академії презентували Молодіжну раду при Міністерстві аграрної політики та продовольства",
     description:
-      "Ще один короткий опис новини для поткий опис новини для приклоткий опис новини для приклоткий опис новини для приклоткий опис новини для приклоткий опис новини для приклоткий опис новини для приклоткий опис новини для приклрикладу.",
-    meta: "5 хвилин тому",
+      "22 травня в Національному університеті «Острозька академія» відбулася зустріч студентів навчально-наукового інституту соціально-гуманітарного менеджменту й навчально-наукового інституту лінгвістики з координаторкою Молодіжної ради при Міністерстві аграрної політики та продовольства Мариною Кобилинською. ",
+    meta: "22.05.2025",
   },
   {
-    image: topNews.image,
-    title: "Третя новина",
-    description: "Опис третьої новини. Тут може бути будь-який текст.",
-    meta: "6 хвилин тому",
+    image:
+      "https://www.oa.edu.ua/assets/images/n/2025/05/big/anons_amu_exchange_program_b.jpg",
+    title:
+      "Конкурс на семестрове навчання в Університеті ім. Адама Міцкевича (Республіка Польща)",
+    description:
+      "У межах двосторонньої Угоди про співпрацю Університет ім. Адама Міцкевича та Національний університет «Острозька академія» оголошують конкурс на здійснення семестрової навчальної мобільності у зимовому семестрі 2025-2026 н.р. (жовтень-лютий 2026 р.).",
+    meta: "22.05.2025",
   },
 ];
 
@@ -147,6 +159,11 @@ const GeneralNews: React.FC = () => {
               textAlign: "left",
               width: "19%",
               cursor: "pointer",
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
               transition: "box-shadow 0.2s, background 0.2s",
               "&:hover": {
                 "& .small-news-title": {
