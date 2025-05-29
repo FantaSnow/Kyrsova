@@ -6,7 +6,7 @@ class AuthService {
   private httpClient: HttpClient;
 
   constructor() {
-    this.httpClient = new HttpClient({ baseURL: "http://20.19.91.105:8000" });
+    this.httpClient = new HttpClient({ baseURL: import.meta.env.REACT_APP_API_URL });
   }
 
   async login(username: string, password: string): Promise<boolean> {
