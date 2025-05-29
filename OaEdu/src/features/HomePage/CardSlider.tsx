@@ -87,11 +87,15 @@ const CardSlider: React.FC<CardSliderProps> = ({ cards }) => {
               key={idx}
               sx={{
                 ...(isVisible
-                  ? getCardStyle(rel)
+                  ? {
+                      ...getCardStyle(rel),
+                      transition: "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)",
+                    }
                   : {
                       opacity: 0,
                       pointerEvents: "none",
                       position: "absolute",
+                      // Без transition для невидимих
                     }),
                 borderRadius: "50px",
                 bgcolor: "secondary.secondary10",
@@ -100,7 +104,6 @@ const CardSlider: React.FC<CardSliderProps> = ({ cards }) => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "flex-start",
-                transition: "all 0.7s cubic-bezier(0.23, 1, 0.32, 1)",
                 overflow: "hidden",
               }}
             >

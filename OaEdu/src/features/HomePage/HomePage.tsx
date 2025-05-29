@@ -1,7 +1,12 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import HomePageImg from "../../assets/icons/HomePage.png";
-import Edik from "../../assets/icons/Edik.png";
+import RomaImg from "../../assets/icons/Roma.jpg";
+import DanyaImg from "../../assets/icons/Danya.jpg";
+import DanyaKImg from "../../assets/icons/DanyaK.jpg";
+import EdikImg from "../../assets/icons/Edik.jpg";
+import DmytroImg from "../../assets/icons/Dmytro.jpg";
+import PetyaImg from "../../assets/icons/petya.jpg";
 
 import CardSlider from "./CardSlider";
 import ReviewSlider from "./ReviewSlider";
@@ -11,32 +16,32 @@ const HomePage: React.FC = () => {
     {
       name: "Строзюк Роман",
       role: "UX/UI дизайнер",
-      img: Edik,
+      img: RomaImg,
     },
     {
       name: "Бурчак Петро",
       role: "DevOps інженер",
-      img: Edik,
+      img: PetyaImg,
     },
     {
       name: "Нестерчук Віталій",
       role: "Мобільний розробник",
-      img: Edik,
+      img: EdikImg,
     },
     {
       name: "Тарасюк Дмитро",
       role: "Фронтенд розробник",
-      img: Edik,
+      img: DmytroImg,
     },
     {
       name: "Довгий Данило",
       role: "Бекенд розробник",
-      img: Edik,
+      img: DanyaImg,
     },
     {
       name: "Качмарський Данило",
       role: "QA тестувальник",
-      img: Edik,
+      img: DanyaKImg,
     },
   ];
 

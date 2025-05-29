@@ -11,41 +11,64 @@ import {
   TextField,
   Pagination,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-import volunteerImg from "../../assets/icons/Edik.png";
+import volunteerImg from "../../assets/icons/NoPhoto.jpg";
 
 const volunteeringList = [
   {
     id: 1,
-    title:
-      'Приєднуйтесь до волонтерської команди LMGF 2025 "Всуну кабу свого кабачка”',
+    title: "Допоможіть організувати благодійний ярмарок для підтримки ЗСУ",
     image: volunteerImg,
-    org: "ІПТБ",
+    org: "Благодійний фонд 'Відкриті Серця'",
     orgLogo: volunteerImg,
   },
   {
     id: 2,
-    title:
-      'Приєднуйтесь до волонтерської команди LMGF 2025 "Всуну кабу свого кабачка”',
+    title: "Волонтер у притулку для тварин “Друзі”",
     image: volunteerImg,
-    org: "ІПТБ",
+    org: "Притулок 'Друзі'",
     orgLogo: volunteerImg,
   },
   {
     id: 3,
-    title:
-      'Приєднуйтесь до волонтерської команди LMGF 2025 "Всуну кабу свого кабачка”',
+    title: "Проведення майстер-класів для дітей у лікарні",
     image: volunteerImg,
-    org: "ІПТБ",
+    org: "ГО 'Щасливе дитинство'",
     orgLogo: volunteerImg,
   },
   {
     id: 4,
-    title:
-      'Приєднуйтесь до волонтерської команди LMGF 2025 "Всуну кабу свого кабачка”',
+    title: "Допомога в організації ІТ-конференції для школярів",
     image: volunteerImg,
-    org: "ІПТБ",
+    org: "IT Step Academy",
+    orgLogo: volunteerImg,
+  },
+  {
+    id: 5,
+    title: "Сортування та пакування гуманітарної допомоги",
+    image: volunteerImg,
+    org: "Волонтерський центр “Разом”",
+    orgLogo: volunteerImg,
+  },
+  {
+    id: 6,
+    title: "Підтримка літніх людей: доставка продуктів та ліків",
+    image: volunteerImg,
+    org: "Червоний Хрест",
+    orgLogo: volunteerImg,
+  },
+  {
+    id: 7,
+    title: "Організація екологічної акції “Чисте місто”",
+    image: volunteerImg,
+    org: "Еко-ініціатива",
+    orgLogo: volunteerImg,
+  },
+  {
+    id: 8,
+    title: "Волонтерство на фестивалі сучасної музики",
+    image: volunteerImg,
+    org: "Молодіжний центр",
     orgLogo: volunteerImg,
   },
 ];
