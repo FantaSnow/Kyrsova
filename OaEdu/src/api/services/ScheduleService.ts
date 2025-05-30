@@ -11,11 +11,10 @@ class ScheduleService {
   // Пошук за назвою предмета (для групи, з датами)
   async getBySubjectName(
     name: string,
-    group_id: number,
     date_start?: string,
     date_end?: string
   ) {
-    let url = `/schedule/get-by-subject-name?name=${encodeURIComponent(name)}&group_id=${group_id}`;
+    let url = `/schedule/get-by-subject-name?name=${encodeURIComponent(name)}`;
     if (date_start) url += `&date_start=${date_start}`;
     if (date_end) url += `&date_end=${date_end}`;
     return http.get(url);

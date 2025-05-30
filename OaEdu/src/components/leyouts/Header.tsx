@@ -17,10 +17,12 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers/AuthContext";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 
 const Header: React.FC = () => {
   const { mode, toggleTheme } = useTheme();
-  const { user, logout } = useAuth(); // <-- отримуємо user з контексту
+  const { logout } = useAuth();
+  const { user, loading } = useCurrentUser();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
@@ -31,6 +33,9 @@ const Header: React.FC = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  // Якщо потрібно, можна показати loader поки йде запит:
+  // if (loading) return null;
 
   return (
     <AppBar position="relative">
@@ -134,7 +139,7 @@ const Header: React.FC = () => {
                     flexDirection: "column",
                   }}
                 >
-                  <Typography variant="bodyS">{user.name}</Typography>
+                  <Typography variant="bodyS">{user.group_name}</Typography>
                   <Typography variant="bodyS">{user.email}</Typography>
                 </Box>
                 <IconButton onClick={handleMenuOpen}>
@@ -162,6 +167,16 @@ const Header: React.FC = () => {
                   }}
                 >
                   <MenuItem onClick={handleMenuClose}>Профіль</MenuItem>
+                  {user?.role_name === "Admin" && (
+                    <MenuItem
+                      onClick={() => {
+                        handleMenuClose();
+                        navigate("/AdminPanel");
+                      }}
+                    >
+                      Адмін панель
+                    </MenuItem>
+                  )}
                   <MenuItem
                     onClick={() => {
                       handleMenuClose();

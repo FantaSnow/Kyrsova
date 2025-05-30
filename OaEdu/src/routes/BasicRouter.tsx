@@ -15,6 +15,17 @@ import NewsDetails from "../features/NewsPage/NewsDetails";
 import SchedulePage from "../features/SchedulePage/SchedulePage";
 import VolunteeringPage from "../features/VolunteeringPage/VolunteeringPage";
 import VolunteeringDetails from "../features/VolunteeringPage/VolunteeringDetails";
+import SchedulesAdminPage from "../features/AdminPage/categories/SchedulesAdmin";
+import AdminLeyout from "../components/adminLeyouts/Layout";
+import TeacherAdminPage from "../features/AdminPage/categories/TeacherAdmin";
+import SubjectAdmin from "../features/AdminPage/categories/SubjectAdmin";
+import SpecialtyAdmin from "../features/AdminPage/categories/SpecialtyAdmin";
+import RoleAdmin from "../features/AdminPage/categories/RoleAdmin";
+import DepartmentAdmin from "../features/AdminPage/categories/DepartmentAdmin";
+import GroupAdmin from "../features/AdminPage/categories/GroupAdmin";
+import ClassTypeAdmin from "../features/AdminPage/categories/ClassTypeAdmin";
+import ClassNumberAdmin from "../features/AdminPage/categories/ClassNumberAdmin";
+import NewsAdmin from "../features/AdminPage/categories/NewsAdmin";
 
 const BasicRouter: React.FC = () => {
   return (
@@ -45,7 +56,7 @@ const BasicRouter: React.FC = () => {
         <Route path="culture" element={<CultureNews />} />
       </Route>
 
-      {/* ProtectedRoute для  сторінок */}
+      {/* ProtectedRoute для сторінок */}
       <Route
         element={
           <Layout>
@@ -55,6 +66,29 @@ const BasicRouter: React.FC = () => {
       >
         <Route path="/HomePage" element={<HomePage />} />
         <Route path="/schedule" element={<SchedulePage />} />
+      </Route>
+
+      <Route
+        path="/AdminPanel"
+        element={
+          <ProtectedRoute role="Admin">
+            <Layout>
+              <AdminLeyout />
+            </Layout>
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<SchedulesAdminPage />} />
+        <Route path="SchedulesAdmin" element={<SchedulesAdminPage />} />
+        <Route path="TeacherAdmin" element={<TeacherAdminPage />} />
+        <Route path="SubjectAdmin" element={<SubjectAdmin />} />
+        <Route path="SpecialtyAdmin" element={<SpecialtyAdmin />} />
+        <Route path="RoleAdmin" element={<RoleAdmin />} />
+        <Route path="DepartmentAdmin" element={<DepartmentAdmin />} />
+        <Route path="GroupAdmin" element={<GroupAdmin />} />
+        <Route path="ClassTypeAdmin" element={<ClassTypeAdmin />} />
+        <Route path="ClassNumberAdmin" element={<ClassNumberAdmin />} />
+        <Route path="NewsAdmin" element={<NewsAdmin />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
