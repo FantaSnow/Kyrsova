@@ -10,7 +10,7 @@ export class HttpClient {
     this.axiosInstance = axios.create({
       baseURL:
         configs.baseURL ||
-        import.meta.env.REACT_APP_API_URL,
+        import.meta.env.VITE_API_URL,
       timeout: configs.timeout || 30000,
       headers: {
         "Content-Type": "application/json",

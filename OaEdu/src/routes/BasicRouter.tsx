@@ -21,10 +21,8 @@ const BasicRouter: React.FC = () => {
     <Routes>
       <Route path="/Login" element={<Login />} />
 
-      {/* ProtectedRoute сторінки */}
+      {/* NoProtectedRoute сторінки */}
       <Route element={<Layout />}>
-        <Route path="/HomePage" element={<HomePage />} />
-        <Route path="/schedule" element={<SchedulePage />} />
         <Route path="/volunteering" element={<VolunteeringPage />} />
         <Route path="/volunteering/:id" element={<VolunteeringDetails />} />
         <Route path="/news/:category/:id" element={<NewsDetails />} />
@@ -54,7 +52,10 @@ const BasicRouter: React.FC = () => {
             <ProtectedRoute />
           </Layout>
         }
-      ></Route>
+      >
+        <Route path="/HomePage" element={<HomePage />} />
+        <Route path="/schedule" element={<SchedulePage />} />
+      </Route>
 
       <Route path="*" element={<NotFound />} />
     </Routes>

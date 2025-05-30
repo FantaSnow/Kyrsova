@@ -15,20 +15,15 @@ import { useTheme } from "../../providers/theme/ThemeProvider";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers/AuthContext";
-
-const user = {
-  name: "Строзюк Роман Володимирович",
-  email: "roman.stroziuk@oa.edu.ua",
-  avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-};
 
 const Header: React.FC = () => {
   const { mode, toggleTheme } = useTheme();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth(); // <-- отримуємо user з контексту
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -120,7 +115,7 @@ const Header: React.FC = () => {
             </MuiLink>
           </Box>
 
-          {/* Profile */}
+          {/* Profile or Login */}
           <Box
             sx={{
               display: "flex",
@@ -130,55 +125,83 @@ const Header: React.FC = () => {
               justifyContent: "center",
             }}
           >
-            <Box
-              sx={{
-                textAlign: "right",
-                display: { xs: "none", lg: "flex" },
-                flexDirection: "column",
-              }}
-            >
-              <Typography variant="bodyS">{user.name}</Typography>
-              <Typography variant="bodyS">{user.email}</Typography>
-            </Box>
-            <IconButton onClick={handleMenuOpen}>
-              <KeyboardArrowDownIcon />
-            </IconButton>
-            <Menu
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleMenuClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              PaperProps={{
-                sx: {
-                  bgcolor: "primary.primary20",
-                  mt: 3,
-                  minWidth: 120,
-                  boxShadow: "0px 2px 2px 2px #00000040",
-                },
-              }}
-            >
-              <MenuItem onClick={handleMenuClose}>Профіль</MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleMenuClose();
-                  logout();
+            {user ? (
+              <>
+                <Box
+                  sx={{
+                    textAlign: "right",
+                    display: { xs: "none", lg: "flex" },
+                    flexDirection: "column",
+                  }}
+                >
+                  <Typography variant="bodyS">{user.name}</Typography>
+                  <Typography variant="bodyS">{user.email}</Typography>
+                </Box>
+                <IconButton onClick={handleMenuOpen}>
+                  <KeyboardArrowDownIcon />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleMenuClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  PaperProps={{
+                    sx: {
+                      bgcolor: "primary.primary20",
+                      mt: 3,
+                      minWidth: 120,
+                      boxShadow: "0px 2px 2px 2px #00000040",
+                    },
+                  }}
+                >
+                  <MenuItem onClick={handleMenuClose}>Профіль</MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleMenuClose();
+                      logout();
+                    }}
+                  >
+                    Вихід
+                  </MenuItem>
+                </Menu>
+                <Avatar
+                  alt={user.name}
+                  src={user.avatar}
+                  sx={{ width: 64, height: 64 }}
+                />
+              </>
+            ) : (
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
                 }}
               >
-                Вихід
-              </MenuItem>
-            </Menu>
-            <Avatar
-              alt={user.name}
-              src={user.avatar}
-              sx={{ width: 64, height: 64 }}
-            />
+                <IconButton
+                  color="primary"
+                  onClick={() => navigate("/login")}
+                  sx={{
+                    bgcolor: "primary.primary20",
+                    px: 3,
+                    py: 1,
+                    borderRadius: 2,
+                    fontWeight: 600,
+                  }}
+                >
+                  <Typography variant="bodyM" color="text.primary">
+                    Увійти
+                  </Typography>
+                </IconButton>
+              </Box>
+            )}
           </Box>
         </Box>
       </Toolbar>

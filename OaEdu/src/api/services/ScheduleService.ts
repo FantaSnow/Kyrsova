@@ -34,9 +34,9 @@ class ScheduleService {
   }
 
   // Отримати розклади за групою (PUT)
-  async getByGroup(group_id: number, date_start?: string, date_end?: string) {
+  async getByGroup(date_start?: string, date_end?: string) {
     return http.put("/schedule/get_by-group", undefined, {
-      params: { group_id, date_start, date_end },
+      params: { date_start, date_end },
     });
   }
 
