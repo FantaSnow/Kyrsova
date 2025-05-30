@@ -1,7 +1,12 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import HomePageImg from "../../assets/icons/HomePage.png";
-import Edik from "../../assets/icons/Edik.png";
+import RomaImg from "../../assets/icons/Roma.jpg";
+import DanyaImg from "../../assets/icons/Danya.jpg";
+import DanyaKImg from "../../assets/icons/DanyaK.jpg";
+import EdikImg from "../../assets/icons/Edik.jpg";
+import DmytroImg from "../../assets/icons/Dmytro.jpg";
+import PetyaImg from "../../assets/icons/petya.jpg";
 
 import CardSlider from "./CardSlider";
 import ReviewSlider from "./ReviewSlider";
@@ -11,32 +16,32 @@ const HomePage: React.FC = () => {
     {
       name: "Строзюк Роман",
       role: "UX/UI дизайнер",
-      img: Edik,
+      img: RomaImg,
     },
     {
       name: "Бурчак Петро",
       role: "DevOps інженер",
-      img: Edik,
+      img: PetyaImg,
     },
     {
       name: "Нестерчук Віталій",
       role: "Мобільний розробник",
-      img: Edik,
+      img: EdikImg,
     },
     {
       name: "Тарасюк Дмитро",
       role: "Фронтенд розробник",
-      img: Edik,
+      img: DmytroImg,
     },
     {
       name: "Довгий Данило",
       role: "Бекенд розробник",
-      img: Edik,
+      img: DanyaImg,
     },
     {
       name: "Качмарський Данило",
       role: "QA тестувальник",
-      img: Edik,
+      img: DanyaKImg,
     },
   ];
 
@@ -96,11 +101,13 @@ const HomePage: React.FC = () => {
           }}
         >
           <Typography variant="h1" color="text.primary">
-            Острозька академія - це традиція що творить майбутнє
+            Острозька академія — твій старт у світ можливостей
           </Typography>
-          <Typography variant="bodyL" color="text.primary">
-            «Від ренесансних класів до сучасних аудиторій 450 років просвіти, що
-            надихає змінювати світ»
+          <Typography variant="bodyL" color="text.primary" sx={{ mt: 4 }}>
+            Вже понад 450 років Острозька академія поєднує глибокі традиції з
+            сучасними підходами до освіти. Тут народжуються ідеї, що змінюють
+            Україну та світ, а кожен студент отримує не лише знання, а й
+            натхнення творити майбутнє.
           </Typography>
         </Box>
         <Box

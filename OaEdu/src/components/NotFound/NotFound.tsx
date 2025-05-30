@@ -26,8 +26,8 @@ const NotFound: React.FC = () => {
       {/* Основний блок */}
       <Box
         sx={{
-          width: { xs: 400, md: 784 },
-          height: { xs: 400, md: 784 },
+          width: { xs: 300, md: 384 },
+          height: { xs: 300, md: 384 },
           bgcolor: "primary.primary90",
           borderRadius: 8,
           display: "flex",
@@ -42,10 +42,10 @@ const NotFound: React.FC = () => {
         <Typography
           color="primary.primary30"
           sx={{
-            fontSize: { xs: 62, md: 96 },
+            fontSize: { xs: 42, md: 56 },
             fontWeight: 700,
             fontFamily: "'poppins', sans-serif",
-            lineHeight: { xs: "72px", md: "96px" },
+            lineHeight: { xs: "42px", md: "56px" },
             letterSpacing: 0,
             textAlign: "left",
           }}
@@ -59,10 +59,10 @@ const NotFound: React.FC = () => {
           color="primary.primary30"
           sx={{
             textAlign: "left",
-            fontSize: { xs: 16, md: 30 },
+            fontSize: { xs: 16, md: 20 },
             fontWeight: 700,
             fontFamily: "'poppins', sans-serif",
-            lineHeight: { md: "34.56px" },
+            lineHeight: { md: "20px" },
           }}
         >
           Ми поки не знаємо в чому проблема, <br /> але скоро це пофіксимо
@@ -76,7 +76,7 @@ const NotFound: React.FC = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: { xs: 200, md: 350 },
+            fontSize: { xs: 150, md: 200 },
             fontWeight: 700,
             fontFamily: "'poppins', sans-serif",
             lineHeight: 1,
@@ -109,7 +109,7 @@ const NotFound: React.FC = () => {
       >
         <Logo
           style={{
-            width: "100vw",
+            width: "100%",
             objectFit: "cover",
             ...iconColors,
           }}

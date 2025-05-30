@@ -6,7 +6,7 @@ export const textFieldOverrides: ThemeOptions["components"] = {
       root: ({ theme }) => ({
         borderRadius: 12,
         "& .MuiOutlinedInput-root": {
-          background: theme.palette.secondary.secondary5,
+          background: theme.palette.secondary.secondary10,
           color: theme.palette.text.primary,
           borderRadius: 12,
           "& fieldset": {

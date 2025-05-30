@@ -1,0 +1,24 @@
+export const getMonday = (date: Date) => {
+  const d = new Date(date);
+  const day = d.getDay() || 7;
+  if (day !== 1) d.setDate(d.getDate() - (day - 1));
+  d.setHours(0, 0, 0, 0);
+  return d;
+};
+
+export const formatDate = (date: Date) =>
+  date.toLocaleDateString("uk-UA").replace(/\//g, ".");
+
+export const getWeekDates = (monday: Date) =>
+  Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    return d;
+  });
+
+export const getRowColor = (type: string, theme: any) => {
+  if (type === "Лекція") return theme.palette.schedule.lecture;
+  if (type === "Лабораторна") return theme.palette.schedule.Lab;
+  if (type === "Практика") return theme.palette.schedule.Prac;
+  return "transparent";
+};

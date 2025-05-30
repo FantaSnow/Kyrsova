@@ -8,7 +8,9 @@ export class HttpClient {
 
   constructor(configs: AxiosRequestConfig) {
     this.axiosInstance = axios.create({
-      baseURL: configs.baseURL || "http://20.19.91.105:8000",
+      baseURL:
+        configs.baseURL ||
+        import.meta.env.VITE_API_URL,
       timeout: configs.timeout || 30000,
       headers: {
         "Content-Type": "application/json",

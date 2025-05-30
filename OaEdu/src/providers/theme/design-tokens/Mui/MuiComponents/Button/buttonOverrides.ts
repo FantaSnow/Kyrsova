@@ -122,6 +122,26 @@ export const buttonOverrides: ThemeOptions["components"] = {
           color: theme.palette.text.primary,
         }),
       },
+      // BIG
+      // Primary
+      {
+        props: { size: "small", variant: "contained", color: "primary" },
+        style: ({ theme }) => ({
+          width: 44,
+          height: 40,
+          backgroundColor: theme.palette.primary.primary30,
+          color: theme.palette.text.primary,
+          "&:hover": {
+            backgroundColor: theme.palette.primary.primary40,
+          },
+          "&:active": {
+            backgroundColor: theme.palette.primary.primary50,
+          },
+          "&.Mui-disabled": {
+            backgroundColor: theme.palette.primary.primary10,
+          },
+        }),
+      },
     ],
   },
 };
