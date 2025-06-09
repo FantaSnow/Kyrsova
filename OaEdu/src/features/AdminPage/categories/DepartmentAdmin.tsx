@@ -120,15 +120,6 @@ const DepartmentAdmin: React.FC = () => {
       let data = null;
       if (searchType === "id") {
         data = await DepartmentService.getById(Number(findId));
-      } else if (searchType === "name") {
-        // Якщо є getByName, використайте його, інакше фільтруйте на фронті
-        if (DepartmentService.getByName) {
-          data = await DepartmentService.getByName(findName);
-        } else {
-          const all = await DepartmentService.getAll(0, 100);
-          const arr = Array.isArray(all) ? all : all.data || [];
-          data = arr.find((d: any) => d.name === findName);
-        }
       }
       setFoundDepartment(data);
     } catch {

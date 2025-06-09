@@ -120,15 +120,6 @@ const ClassTypeAdmin: React.FC = () => {
       let data = null;
       if (searchType === "id") {
         data = await ClassTypeService.getById(Number(findId));
-      } else if (searchType === "name") {
-        // Якщо є getByName, використайте його, інакше фільтруйте на фронті
-        if (ClassTypeService.getByName) {
-          data = await ClassTypeService.getByName(findName);
-        } else {
-          const all = await ClassTypeService.getAll(0, 100);
-          const arr = Array.isArray(all) ? all : all.data || [];
-          data = arr.find((d: any) => d.name === findName);
-        }
       }
       setFoundClassType(data);
     } catch {

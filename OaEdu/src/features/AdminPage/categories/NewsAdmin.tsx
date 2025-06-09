@@ -1,4 +1,5 @@
-import React, { useEffect, useState, ChangeEvent, useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
+import type { ChangeEvent } from "react";
 import {
   Box,
   Typography,
@@ -190,7 +191,15 @@ const NewsAdmin: React.FC = () => {
         data = await NewsService.getById(Number(findId));
       } else if (searchType === "name") {
         const all = await NewsService.getAll(0, 100);
-        const arr = Array.isArray(all) ? all : all.data || [];
+        // Виправлення типу unknown:
+        const arr = Array.isArray(all)
+          ? all
+          : all &&
+            typeof all === "object" &&
+            "data" in all &&
+            Array.isArray((all as any).data)
+          ? (all as any).data
+          : [];
         data = arr.find((n: any) => n.name === findName);
       }
       setFoundNews(data);

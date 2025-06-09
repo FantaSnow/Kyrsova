@@ -128,7 +128,12 @@ const ClassNumberAdmin: React.FC = () => {
         data = await ClassNumberService.getById(Number(findId));
       } else if (searchType === "number") {
         const all = await ClassNumberService.getAll(0, 100);
-        const arr = Array.isArray(all) ? all : all.data || [];
+        // Явно вказуємо тип для all
+        const arr = Array.isArray(all)
+          ? all
+          : Array.isArray((all as any).data)
+          ? (all as any).data
+          : [];
         data = arr.find((d: any) => String(d.number) === findNumber);
       }
       setFoundClassNumber(data);

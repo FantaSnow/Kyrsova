@@ -140,7 +140,15 @@ const GroupAdmin: React.FC = () => {
         data = await GroupService.getByName(findName);
       } else if (searchType === "specialty_id") {
         data = await GroupService.getBySpecialty(Number(findSpecialtyId));
-        if (data && data.data) data = data.data;
+        // Виправлення: перевіряємо, що data — це об'єкт і має масив data
+        if (
+          data &&
+          typeof data === "object" &&
+          "data" in data &&
+          Array.isArray((data as any).data)
+        ) {
+          data = (data as any).data;
+        }
       }
       setFoundGroup(data);
     } catch {

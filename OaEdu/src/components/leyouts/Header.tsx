@@ -34,9 +34,6 @@ const Header: React.FC = () => {
     setAnchorEl(null);
   };
 
-  // Якщо потрібно, можна показати loader поки йде запит:
-  // if (loading) return null;
-
   return (
     <AppBar position="relative">
       <Toolbar disableGutters style={{ width: "100%" }}>
