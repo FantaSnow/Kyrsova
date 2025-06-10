@@ -47,24 +47,33 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
     isEmpty: boolean
   ): React.ReactNode => {
     if (isEmpty) return headerKey === "id" ? pairNum : null;
+    let value: any;
     switch (headerKey) {
-      case "subject":
-        return row.subject?.name;
-      case "teacher":
-        return row.teacher?.name;
-      case "auditory":
-        return row.auditory;
-      case "class_type":
-        return row.class_type?.name;
-      case "classnumber":
-        return row.classnumber
-          ? `${row.classnumber.time_start} - ${row.classnumber.time_end}`
+      case "pair": // Стовпчик "Пара" (номер)
+        value = row.classnumber?.number ?? "";
+        break;
+      case "type": // Стовпчик "Тип"
+        value = row.class_type?.name ?? "";
+        break;
+      case "time": // Стовпчик "Час"
+        value = row.classnumber
+          ? `${row.classnumber.time_start.slice(
+              0,
+              8
+            )} - ${row.classnumber.time_end.slice(0, 8)}`
           : "";
-      case "id":
-        return pairNum;
+        break;
+      case "code": // Стовпчик "Кодове слово"
+        value = row.teacher?.connectionCode ?? "";
+        break;
       default:
-        return row[headerKey];
+        value = row[headerKey];
     }
+    if (typeof value === "object" && value !== null) {
+      if ("name" in value) return value.name;
+      return JSON.stringify(value);
+    }
+    return value ?? "";
   };
 
   const EmptyRow = ({ colSpan }: { colSpan: number }) => (
@@ -148,14 +157,13 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                       }}
                     >
                       {visibleHeaders.map((header, cellIdx) => {
-                        let value: React.ReactNode = null;
-                        if (isEmpty) {
-                          value = header.key === "id" ? pairNum : null;
-                        } else if (header.render) {
-                          value = header.render(row, pairNum);
-                        } else {
-                          value = row[header.key];
-                        }
+                        const value = getCellValue(
+                          row,
+                          header.key,
+                          pairNum,
+                          isEmpty
+                        );
+
                         return (
                           <TableCell
                             key={header.key}
@@ -167,7 +175,7 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
                                 cellIdx === visibleHeaders.length - 1 ? 16 : 0,
                               borderBottomRightRadius:
                                 cellIdx === visibleHeaders.length - 1 ? 16 : 0,
-                              background: "inherit", // або просто видаліть цю лінію
+                              background: "inherit",
                               px: 1.5,
                               py: 1.2,
                             }}
