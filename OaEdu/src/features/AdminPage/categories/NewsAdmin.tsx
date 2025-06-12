@@ -571,14 +571,15 @@ const NewsAdmin: React.FC = () => {
                   )}
                 </TableCell>
                 <TableCell>
-                  {news.main_image_path && (
+                  {/* Головне зображення */}
+                  {news.photo_path && (
                     <a
-                      href={news.main_image_path}
+                      href={news.photo_path}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <img
-                        src={news.main_image_path}
+                        src={news.photo_path}
                         alt="main"
                         style={{ maxWidth: 80, maxHeight: 80 }}
                       />
@@ -586,23 +587,27 @@ const NewsAdmin: React.FC = () => {
                   )}
                 </TableCell>
                 <TableCell>
+                  {/* Галерея */}
                   {Array.isArray(news.gallery_photos) &&
                   news.gallery_photos.length > 0
-                    ? news.gallery_photos.map((img: string, idx: number) => (
-                        <a
-                          key={idx}
-                          href={img}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ marginRight: 4 }}
-                        >
-                          <img
-                            src={img}
-                            alt={`gallery-${idx}`}
-                            style={{ maxWidth: 50, maxHeight: 50 }}
-                          />
-                        </a>
-                      ))
+                    ? news.gallery_photos.map(
+                        (imgObj: any, idx: number) =>
+                          imgObj.image_path && (
+                            <a
+                              key={idx}
+                              href={imgObj.image_path}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{ marginRight: 4 }}
+                            >
+                              <img
+                                src={imgObj.image_path}
+                                alt={`gallery-${idx}`}
+                                style={{ maxWidth: 50, maxHeight: 50 }}
+                              />
+                            </a>
+                          )
+                      )
                     : ""}
                 </TableCell>
                 <TableCell>

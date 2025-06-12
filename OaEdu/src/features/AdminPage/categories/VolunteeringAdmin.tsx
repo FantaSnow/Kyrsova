@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Box,
   Typography,
@@ -21,125 +21,126 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import ClassNumberService from "../../../api/services/ClassNumberService";
+import VolunteeringService from "../../../api/services/VolunteeringService";
 import { useEntityDetails } from "../../../hooks/useEntityDetails";
-import { toIsoTime } from "../../../utils/date";
 
-const emptyClassNumber = {
+const emptyVolunteering = {
   id: 0,
-  number: "",
-  time_start: "",
-  time_end: "",
+  title: "",
+  description: "",
+  date: "",
+  location: "",
+  org: "",
+  orgLogo: "",
+  image: "",
+  category: "",
+  is_active: true,
 };
 
-type ClassNumberField = keyof typeof emptyClassNumber;
+type VolunteeringField = keyof typeof emptyVolunteering;
 
-const ClassNumberAdmin: React.FC = () => {
-  const [classNumbers, setClassNumbers] = useState<any[]>([]);
+const VolunteeringAdmin: React.FC = () => {
+  const [vols, setVols] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [newClassNumber, setNewClassNumber] =
-    useState<Record<ClassNumberField, any>>(emptyClassNumber);
+  const [newVol, setNewVol] =
+    useState<Record<VolunteeringField, any>>(emptyVolunteering);
   const [editingId, setEditingId] = useState<number | null>(null);
 
   // Пошук
   const [tableMode, setTableMode] = useState<"all" | "search">("all");
-  const [searchType, setSearchType] = useState<"id" | "number">("id");
+  const [searchType, setSearchType] = useState<"id" | "title">("id");
   const [findId, setFindId] = useState("");
-  const [findNumber, setFindNumber] = useState("");
-  const [foundClassNumber, setFoundClassNumber] = useState<any | null>(null);
+  const [findTitle, setFindTitle] = useState("");
+  const [foundVol, setFoundVol] = useState<any | null>(null);
 
   const entityDetails = useEntityDetails();
 
-  // Завантажити всі номери занять
-  const fetchClassNumbers = async () => {
+  // Завантажити всі волонтерства
+  const fetchVols = async () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await ClassNumberService.getAll(0, 100);
-      if (Array.isArray(data)) setClassNumbers(data);
+      const data = await VolunteeringService.getAll(0, 100);
+      if (Array.isArray(data)) setVols(data);
       else if (
         data &&
         typeof data === "object" &&
         Array.isArray((data as any).data)
       )
-        setClassNumbers((data as any).data);
-      else setClassNumbers([]);
+        setVols((data as any).data);
+      else setVols([]);
     } catch {
-      setError("Помилка завантаження номерів занять");
+      setError("Помилка завантаження волонтерств");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchClassNumbers();
+    fetchVols();
   }, []);
 
-  // Створити/оновити номер заняття
+  // Створити/оновити волонтерство
   const handleSave = async () => {
     setLoading(true);
     setError(null);
     try {
-      const payload = {
-        ...newClassNumber,
-        number: Number(newClassNumber.number),
-        time_start: toIsoTime(newClassNumber.time_start?.slice(0, 5)),
-        time_end: toIsoTime(newClassNumber.time_end?.slice(0, 5)),
-      };
       if (editingId !== null) {
-        await ClassNumberService.update({ ...payload, id: editingId });
+        await VolunteeringService.update({ ...newVol, id: editingId });
       } else {
-        await ClassNumberService.create(payload);
+        await VolunteeringService.create(newVol);
       }
-      setNewClassNumber(emptyClassNumber);
+      setNewVol(emptyVolunteering);
       setEditingId(null);
-      await fetchClassNumbers();
+      await fetchVols();
     } catch {
       setError(
         editingId !== null
-          ? "Помилка оновлення номера заняття"
-          : "Помилка створення номера заняття"
+          ? "Помилка оновлення волонтерства"
+          : "Помилка створення волонтерства"
       );
     } finally {
       setLoading(false);
     }
   };
 
-  // Видалити номер заняття
+  // Видалити волонтерство
   const handleDelete = async (id: number) => {
     setLoading(true);
     setError(null);
     try {
-      await ClassNumberService.delete(id);
-      await fetchClassNumbers();
+      await VolunteeringService.delete(id);
+      await fetchVols();
     } catch {
-      setError("Помилка видалення номера заняття");
+      setError("Помилка видалення волонтерства");
     } finally {
       setLoading(false);
     }
   };
 
-  // Пошук номера заняття
+  // Пошук волонтерства
   const handleFind = async () => {
     setLoading(true);
     setError(null);
-    setFoundClassNumber(null);
+    setFoundVol(null);
     try {
       let data = null;
       if (searchType === "id") {
-        data = await ClassNumberService.getById(Number(findId));
-      } else if (searchType === "number") {
-        const all = await ClassNumberService.getAll(0, 100);
-        // Явно вказуємо тип для all
+        data = await VolunteeringService.getById(Number(findId));
+      } else if (searchType === "title") {
+        const all = await VolunteeringService.getAll(0, 100);
         const arr = Array.isArray(all)
           ? all
-          : Array.isArray((all as any).data)
+          : all &&
+            typeof all === "object" &&
+            "data" in all &&
+            Array.isArray((all as any).data)
           ? (all as any).data
           : [];
-        data = arr.find((d: any) => String(d.number) === findNumber);
+        data = arr.find((v: any) => v.title === findTitle);
       }
-      setFoundClassNumber(data);
+      setFoundVol(data);
     } catch {
       setError("Не знайдено");
     } finally {
@@ -149,11 +150,11 @@ const ClassNumberAdmin: React.FC = () => {
 
   // Мемоізовані дані для таблиці
   const tableData = useMemo(() => {
-    if (tableMode === "all") return classNumbers;
-    if (!foundClassNumber) return [];
-    if (Array.isArray(foundClassNumber)) return foundClassNumber;
-    return [foundClassNumber];
-  }, [tableMode, classNumbers, foundClassNumber]);
+    if (tableMode === "all") return vols;
+    if (!foundVol) return [];
+    if (Array.isArray(foundVol)) return foundVol;
+    return [foundVol];
+  }, [tableMode, vols, foundVol]);
 
   return (
     <Box sx={{ p: 3 }}>
@@ -163,74 +164,108 @@ const ClassNumberAdmin: React.FC = () => {
         align="center"
         sx={{ mb: 3 }}
       >
-        Тестування ClassNumberService
+        Тестування VolunteeringService
       </Typography>
       {loading && <CircularProgress />}
       {error && <Typography color="error">{error}</Typography>}
 
       {/* Форма створення/редагування */}
       <Paper sx={{ p: 2, mb: 2 }}>
-        <Typography variant="h6">Створити/оновити номер заняття</Typography>
+        <Typography variant="h6">Створити/оновити волонтерство</Typography>
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, mb: 2 }}>
           <TextField
-            label="Номер"
-            value={newClassNumber.number}
+            label="Назва"
+            value={newVol.title}
+            onChange={(e) => setNewVol({ ...newVol, title: e.target.value })}
+            size="small"
+            fullWidth
+            sx={{ minWidth: 200, flex: "1 1 200px" }}
+          />
+          <TextField
+            label="Опис"
+            value={newVol.description}
             onChange={(e) =>
-              setNewClassNumber({ ...newClassNumber, number: e.target.value })
+              setNewVol({ ...newVol, description: e.target.value })
             }
             size="small"
-            type="number"
+            fullWidth
+            sx={{ minWidth: 200, flex: "1 1 200px" }}
+          />
+          <TextField
+            label="Дата"
+            value={newVol.date}
+            onChange={(e) => setNewVol({ ...newVol, date: e.target.value })}
+            size="small"
             fullWidth
             sx={{ minWidth: 120, flex: "1 1 120px" }}
           />
           <TextField
-            label="Час початку"
-            type="time"
-            value={
-              newClassNumber.time_start
-                ? newClassNumber.time_start.slice(0, 5)
-                : ""
-            }
-            onChange={(e) =>
-              setNewClassNumber({
-                ...newClassNumber,
-                time_start: e.target.value + ":00",
-              })
-            }
+            label="Локація"
+            value={newVol.location}
+            onChange={(e) => setNewVol({ ...newVol, location: e.target.value })}
             size="small"
             fullWidth
             sx={{ minWidth: 120, flex: "1 1 120px" }}
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ step: 1 }}
           />
           <TextField
-            label="Час завершення"
-            type="time"
-            value={
-              newClassNumber.time_end ? newClassNumber.time_end.slice(0, 5) : ""
-            }
-            onChange={(e) =>
-              setNewClassNumber({
-                ...newClassNumber,
-                time_end: e.target.value + ":00",
-              })
-            }
+            label="Організатор"
+            value={newVol.org}
+            onChange={(e) => setNewVol({ ...newVol, org: e.target.value })}
             size="small"
             fullWidth
             sx={{ minWidth: 120, flex: "1 1 120px" }}
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ step: 1 }}
           />
+          <TextField
+            label="Лого організатора (URL)"
+            value={newVol.orgLogo}
+            onChange={(e) => setNewVol({ ...newVol, orgLogo: e.target.value })}
+            size="small"
+            fullWidth
+            sx={{ minWidth: 120, flex: "1 1 120px" }}
+          />
+          <TextField
+            label="Зображення (URL)"
+            value={newVol.image}
+            onChange={(e) => setNewVol({ ...newVol, image: e.target.value })}
+            size="small"
+            fullWidth
+            sx={{ minWidth: 120, flex: "1 1 120px" }}
+          />
+          <TextField
+            label="Категорія"
+            value={newVol.category}
+            onChange={(e) => setNewVol({ ...newVol, category: e.target.value })}
+            size="small"
+            fullWidth
+            sx={{ minWidth: 120, flex: "1 1 120px" }}
+          />
+          <FormControl
+            fullWidth
+            size="small"
+            sx={{ minWidth: 120, flex: "1 1 120px" }}
+          >
+            <InputLabel>Активний</InputLabel>
+            <Select
+              value={newVol.is_active ? "true" : "false"}
+              label="Активний"
+              onChange={(e) =>
+                setNewVol({ ...newVol, is_active: e.target.value === "true" })
+              }
+            >
+              <MenuItem value="true">Так</MenuItem>
+              <MenuItem value="false">Ні</MenuItem>
+            </Select>
+          </FormControl>
         </Box>
         <Button variant="contained" onClick={handleSave} sx={{ mt: 2, mr: 2 }}>
-          {editingId !== null ? "Зберегти зміни" : "Створити номер заняття"}
+          {editingId !== null ? "Зберегти зміни" : "Створити волонтерство"}
         </Button>
         {editingId !== null && (
           <Button
             variant="outlined"
             color="secondary"
             onClick={() => {
-              setNewClassNumber(emptyClassNumber);
+              setNewVol(emptyVolunteering);
               setEditingId(null);
             }}
             sx={{ mt: 2 }}
@@ -250,21 +285,21 @@ const ClassNumberAdmin: React.FC = () => {
               label="Режим"
               onChange={(e) => setTableMode(e.target.value as any)}
             >
-              <MenuItem value="all">Всі номери занять</MenuItem>
+              <MenuItem value="all">Всі</MenuItem>
               <MenuItem value="search">Пошук</MenuItem>
             </Select>
           </FormControl>
           {tableMode === "search" && (
             <>
-              <FormControl sx={{ minWidth: 180, mr: 2 }} size="small">
+              <FormControl sx={{ minWidth: 120, mr: 2 }} size="small">
                 <InputLabel>Тип пошуку</InputLabel>
                 <Select
                   value={searchType}
                   label="Тип пошуку"
                   onChange={(e) => setSearchType(e.target.value as any)}
                 >
-                  <MenuItem value="id">За ID</MenuItem>
-                  <MenuItem value="number">За номером</MenuItem>
+                  <MenuItem value="id">ID</MenuItem>
+                  <MenuItem value="title">Назва</MenuItem>
                 </Select>
               </FormControl>
               {searchType === "id" && (
@@ -276,16 +311,16 @@ const ClassNumberAdmin: React.FC = () => {
                   sx={{ mr: 2 }}
                 />
               )}
-              {searchType === "number" && (
+              {searchType === "title" && (
                 <TextField
-                  label="Номер"
-                  value={findNumber}
-                  onChange={(e) => setFindNumber(e.target.value)}
+                  label="Назва"
+                  value={findTitle}
+                  onChange={(e) => setFindTitle(e.target.value)}
                   size="small"
                   sx={{ mr: 2 }}
                 />
               )}
-              <Button variant="outlined" onClick={handleFind} sx={{ ml: 2 }}>
+              <Button variant="contained" onClick={handleFind}>
                 Знайти
               </Button>
             </>
@@ -293,21 +328,25 @@ const ClassNumberAdmin: React.FC = () => {
         </Box>
 
         <Typography variant="h6" sx={{ mb: 1 }}>
-          {tableMode === "all" ? "Всі номери занять" : "Результати пошуку"}
+          {tableMode === "all" ? "Всі волонтерства" : "Результати пошуку"}
         </Typography>
         <Table size="small">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell>Номер</TableCell>
-              <TableCell>Час початку</TableCell>
-              <TableCell>Час завершення</TableCell>
+              <TableCell>Назва</TableCell>
+              <TableCell>Опис</TableCell>
+              <TableCell>Дата</TableCell>
+              <TableCell>Локація</TableCell>
+              <TableCell>Організатор</TableCell>
+              <TableCell>Категорія</TableCell>
+              <TableCell>Активний</TableCell>
               <TableCell>Дії</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {tableData.map((classNumber: any) => (
-              <TableRow key={classNumber.id}>
+            {tableData.map((vol: any) => (
+              <TableRow key={vol.id}>
                 <TableCell>
                   <span
                     style={{
@@ -317,34 +356,29 @@ const ClassNumberAdmin: React.FC = () => {
                     }}
                     onClick={() =>
                       entityDetails.showDetails(
-                        "Номер заняття",
-                        ClassNumberService,
-                        classNumber.id
+                        "Волонтерство",
+                        VolunteeringService,
+                        vol.id
                       )
                     }
                   >
-                    {classNumber.id}
+                    {vol.id}
                   </span>
                 </TableCell>
-                <TableCell>{classNumber.number}</TableCell>
-                <TableCell>
-                  {classNumber.time_start
-                    ? classNumber.time_start.slice(0, 5)
-                    : ""}
-                </TableCell>
-                <TableCell>
-                  {classNumber.time_end ? classNumber.time_end.slice(0, 5) : ""}
-                </TableCell>
+                <TableCell>{vol.title}</TableCell>
+                <TableCell>{vol.description}</TableCell>
+                <TableCell>{vol.date}</TableCell>
+                <TableCell>{vol.location}</TableCell>
+                <TableCell>{vol.org}</TableCell>
+                <TableCell>{vol.category}</TableCell>
+                <TableCell>{vol.is_active ? "Так" : "Ні"}</TableCell>
                 <TableCell>
                   <Button
                     size="small"
                     variant="outlined"
                     onClick={() => {
-                      setNewClassNumber({
-                        ...emptyClassNumber,
-                        ...classNumber,
-                      });
-                      setEditingId(classNumber.id);
+                      setNewVol({ ...emptyVolunteering, ...vol });
+                      setEditingId(vol.id);
                     }}
                     sx={{ mr: 1 }}
                   >
@@ -354,7 +388,7 @@ const ClassNumberAdmin: React.FC = () => {
                     size="small"
                     color="error"
                     variant="outlined"
-                    onClick={() => handleDelete(classNumber.id)}
+                    onClick={() => handleDelete(vol.id)}
                   >
                     Видалити
                   </Button>
@@ -392,4 +426,4 @@ const ClassNumberAdmin: React.FC = () => {
   );
 };
 
-export default ClassNumberAdmin;
+export default VolunteeringAdmin;

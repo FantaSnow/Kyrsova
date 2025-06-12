@@ -34,11 +34,11 @@ const emptySchedule = {
   date: "",
   auditory: "",
   connectionCode: "",
-  subject_id: 0,
-  teacher_id: 0,
-  group_id: 0,
-  class_type_id: 0,
-  classnumber_id: 0,
+  subject_id: "",
+  teacher_id: "",
+  group_id: "",
+  class_type: "",
+  class_number_id: "",
 };
 
 type ScheduleField = keyof typeof emptySchedule;
@@ -85,7 +85,6 @@ const SchedulesAdmin: React.FC = () => {
     );
   }, []);
 
-  // Завантажити всі розклади
   const fetchSchedules = async () => {
     setLoading(true);
     setError(null);
@@ -110,15 +109,29 @@ const SchedulesAdmin: React.FC = () => {
     fetchSchedules();
   }, []);
 
-  // Створити/оновити розклад
+  function cleanSchedulePayload(schedule: any) {
+    return {
+      id: schedule.id,
+      date: schedule.date,
+      auditory: schedule.auditory,
+      connectionCode: schedule.connectionCode,
+      subject_id: Number(schedule.subject_id) || 0,
+      group_id: Number(schedule.group_id) || 0,
+      teacher_id: Number(schedule.teacher_id) || 0,
+      class_type: Number(schedule.class_type) || 0,
+      class_number_id: Number(schedule.class_number_id) || 0,
+    };
+  }
+
   const handleSave = async () => {
     setLoading(true);
     setError(null);
     try {
+      const payload = cleanSchedulePayload(newSchedule);
       if (editingId !== null) {
-        await ScheduleService.update({ ...newSchedule, id: editingId });
+        await ScheduleService.update({ ...payload, id: editingId });
       } else {
-        await ScheduleService.create(newSchedule);
+        await ScheduleService.create(payload);
       }
       setNewSchedule(emptySchedule);
       setEditingId(null);
@@ -244,10 +257,11 @@ const SchedulesAdmin: React.FC = () => {
               onChange={(e) =>
                 setNewSchedule({
                   ...newSchedule,
-                  subject_id: Number(e.target.value),
+                  subject_id: e.target.value,
                 })
               }
             >
+              <MenuItem value="">Не вибрано</MenuItem>
               {subjects.map((s) => (
                 <MenuItem key={s.id} value={s.id}>
                   {s.name} (id: {s.id})
@@ -267,10 +281,11 @@ const SchedulesAdmin: React.FC = () => {
               onChange={(e) =>
                 setNewSchedule({
                   ...newSchedule,
-                  group_id: Number(e.target.value),
+                  group_id: e.target.value,
                 })
               }
             >
+              <MenuItem value="">Не вибрано</MenuItem>
               {groups.map((g) => (
                 <MenuItem key={g.id} value={g.id}>
                   {g.name} (id: {g.id})
@@ -290,10 +305,11 @@ const SchedulesAdmin: React.FC = () => {
               onChange={(e) =>
                 setNewSchedule({
                   ...newSchedule,
-                  teacher_id: Number(e.target.value),
+                  teacher_id: e.target.value,
                 })
               }
             >
+              <MenuItem value="">Не вибрано</MenuItem>
               {teachers.map((t) => (
                 <MenuItem key={t.id} value={t.id}>
                   {t.name} (id: {t.id})
@@ -308,15 +324,16 @@ const SchedulesAdmin: React.FC = () => {
           >
             <InputLabel>Тип заняття</InputLabel>
             <Select
-              value={newSchedule.class_type_id}
+              value={newSchedule.class_type}
               label="Тип заняття"
               onChange={(e) =>
                 setNewSchedule({
                   ...newSchedule,
-                  class_type_id: Number(e.target.value),
+                  class_type: e.target.value,
                 })
               }
             >
+              <MenuItem value="">Не вибрано</MenuItem>
               {classTypes.map((ct) => (
                 <MenuItem key={ct.id} value={ct.id}>
                   {ct.name} (id: {ct.id})
@@ -331,15 +348,16 @@ const SchedulesAdmin: React.FC = () => {
           >
             <InputLabel>Пара</InputLabel>
             <Select
-              value={newSchedule.classnumber_id}
+              value={newSchedule.class_number_id}
               label="Пара"
               onChange={(e) =>
                 setNewSchedule({
                   ...newSchedule,
-                  classnumber_id: Number(e.target.value),
+                  class_number_id: e.target.value,
                 })
               }
             >
+              <MenuItem value="">Не вибрано</MenuItem>
               {classNumbers.map((cn) => (
                 <MenuItem key={cn.id} value={cn.id}>
                   {cn.number} ({cn.time_start}-{cn.time_end}) id: {cn.id}
@@ -394,7 +412,7 @@ const SchedulesAdmin: React.FC = () => {
                   <MenuItem value="date">За датою</MenuItem>
                 </Select>
               </FormControl>
-              {searchType === "id" && (
+              {tableMode === "search" && searchType === "id" && (
                 <TextField
                   label="ID"
                   value={findId}
@@ -403,7 +421,7 @@ const SchedulesAdmin: React.FC = () => {
                   sx={{ mr: 2 }}
                 />
               )}
-              {searchType === "subject" && (
+              {tableMode === "search" && searchType === "subject" && (
                 <>
                   <TextField
                     label="Назва предмета"
@@ -432,7 +450,7 @@ const SchedulesAdmin: React.FC = () => {
                   />
                 </>
               )}
-              {searchType === "date" && (
+              {tableMode === "search" && searchType === "date" && (
                 <>
                   <TextField
                     label="Дата початку"
@@ -501,14 +519,8 @@ const SchedulesAdmin: React.FC = () => {
                       )
                     }
                   >
-                    id: {schedule.group_id}
+                    {schedule.group?.name || ""}
                   </span>
-                  {schedule.group && (
-                    <>
-                      <br />
-                      name: {schedule.group.name}
-                    </>
-                  )}
                 </TableCell>
                 <TableCell>
                   <span
@@ -525,16 +537,8 @@ const SchedulesAdmin: React.FC = () => {
                       )
                     }
                   >
-                    id: {schedule.subject_id}
+                    {schedule.subject?.name || ""}
                   </span>
-                  {schedule.subject && (
-                    <>
-                      <br />
-                      name: {schedule.subject.name}
-                      <br />
-                      desc: {schedule.subject.desc}
-                    </>
-                  )}
                 </TableCell>
                 <TableCell>
                   <span
@@ -547,18 +551,12 @@ const SchedulesAdmin: React.FC = () => {
                       entityDetails.showDetails(
                         "Тип заняття",
                         ClassTypeService,
-                        schedule.class_type_id
+                        schedule.class_type_id || schedule.class_type
                       )
                     }
                   >
-                    id: {schedule.class_type_id ?? schedule.class_type?.id}
+                    {schedule.class_type?.name || ""}
                   </span>
-                  {schedule.class_type && (
-                    <>
-                      <br />
-                      name: {schedule.class_type.name}
-                    </>
-                  )}
                 </TableCell>
                 <TableCell>
                   <span
@@ -575,18 +573,8 @@ const SchedulesAdmin: React.FC = () => {
                       )
                     }
                   >
-                    id: {schedule.teacher_id}
+                    {schedule.teacher?.name || ""}
                   </span>
-                  {schedule.teacher && (
-                    <>
-                      <br />
-                      name: {schedule.teacher.name}
-                      <br />
-                      email: {schedule.teacher.email}
-                      <br />
-                      department_id: {schedule.teacher.department_id}
-                    </>
-                  )}
                 </TableCell>
                 <TableCell>
                   <span
@@ -599,22 +587,12 @@ const SchedulesAdmin: React.FC = () => {
                       entityDetails.showDetails(
                         "Пара",
                         ClassNumberService,
-                        schedule.classnumber_id
+                        schedule.class_number_id
                       )
                     }
                   >
-                    id: {schedule.classnumber_id ?? schedule.classnumber?.id}
+                    {schedule.classnumber?.number || ""}
                   </span>
-                  {schedule.classnumber && (
-                    <>
-                      <br />
-                      number: {schedule.classnumber.number}
-                      <br />
-                      time_start: {schedule.classnumber.time_start}
-                      <br />
-                      time_end: {schedule.classnumber.time_end}
-                    </>
-                  )}
                 </TableCell>
                 <TableCell>
                   <Button

@@ -5,7 +5,7 @@ import { NavLink, useLocation } from "react-router-dom";
 const categories = [
   { label: "Розклад", path: "SchedulesAdmin" },
   { label: "Новини", path: "NewsAdmin" },
-  { label: "Волонтерство", path: "volunteering" },
+  { label: "Волонтерство", path: "VolunteeringAdmin" },
   { label: "Викладачі", path: "TeacherAdmin" },
   { label: "Предмети", path: "SubjectAdmin" },
   { label: "Спеціальність", path: "SpecialtyAdmin" },

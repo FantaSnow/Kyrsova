@@ -2,9 +2,9 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import Layout from "../components/leyouts/Layout";
-import Login from "../components/Login/Login";
+import Login from "../components/login/Login";
 import HomePage from "../features/HomePage/HomePage";
-import NotFound from "../components/NotFound/NotFound";
+import NotFound from "../components/notFound/NotFound";
 import NewsLayout from "../components/newsLeyouts/Layout";
 import GeneralNews from "../features/NewsPage/categories/GeneralNews";
 import SportNews from "../features/NewsPage/categories/SportNews";
@@ -26,6 +26,7 @@ import GroupAdmin from "../features/AdminPage/categories/GroupAdmin";
 import ClassTypeAdmin from "../features/AdminPage/categories/ClassTypeAdmin";
 import ClassNumberAdmin from "../features/AdminPage/categories/ClassNumberAdmin";
 import NewsAdmin from "../features/AdminPage/categories/NewsAdmin";
+import VolunteeringAdmin from "../features/AdminPage/categories/VolunteeringAdmin";
 
 const BasicRouter: React.FC = () => {
   return (
@@ -89,6 +90,7 @@ const BasicRouter: React.FC = () => {
         <Route path="ClassTypeAdmin" element={<ClassTypeAdmin />} />
         <Route path="ClassNumberAdmin" element={<ClassNumberAdmin />} />
         <Route path="NewsAdmin" element={<NewsAdmin />} />
+        <Route path="VolunteeringAdmin" element={<VolunteeringAdmin />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

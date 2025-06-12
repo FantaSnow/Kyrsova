@@ -10,9 +10,9 @@ export const weekDays = [
 
 export const tableHeaders = [
   {
-    key: "id",
-    label: "#",
-    render: (row: any, pairNum: number) => row.classnumber?.id ?? pairNum,
+    key: "pair",
+    label: "Пара",
+    render: (row: any) => row.classnumber?.number ?? "",
   },
   {
     key: "time",
@@ -46,11 +46,6 @@ export const tableHeaders = [
     key: "group",
     label: "Група",
     render: (row: any) => row.group?.name ?? "",
-  },
-  {
-    key: "pair",
-    label: "Пара",
-    render: (row: any) => row.classnumber?.number ?? "",
   },
   {
     key: "code",

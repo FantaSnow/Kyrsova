@@ -36,7 +36,11 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
 
   const lessonsMap = useMemo(() => {
     const map = new Map<number, any>();
-    lessons.forEach((l) => map.set(Number(l.id), l));
+    lessons.forEach((l) => {
+      if (l.classnumber && l.classnumber.number) {
+        map.set(Number(l.classnumber.number), l);
+      }
+    });
     return map;
   }, [lessons]);
 
@@ -59,8 +63,8 @@ const ScheduleTable: React.FC<ScheduleTableProps> = ({
         value = row.classnumber
           ? `${row.classnumber.time_start.slice(
               0,
-              8
-            )} - ${row.classnumber.time_end.slice(0, 8)}`
+              6
+            )} - ${row.classnumber.time_end.slice(0, 6)}`
           : "";
         break;
       case "code": // Стовпчик "Кодове слово"

@@ -19,6 +19,6 @@ export const getWeekDates = (monday: Date) =>
 export const getRowColor = (type: string, theme: any) => {
   if (type === "Лекція") return theme.palette.schedule.lecture;
   if (type === "Лабораторна") return theme.palette.schedule.Lab;
-  if (type === "Практика") return theme.palette.schedule.Prac;
+  if (type === "Практична") return theme.palette.schedule.Prac;
   return "transparent";
 };
