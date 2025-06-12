@@ -148,7 +148,7 @@ const SubjectAdmin: React.FC = () => {
         align="center"
         sx={{ mb: 3 }}
       >
-        Тестування SubjectService
+        Адміністрування предметів
       </Typography>
       {loading && <CircularProgress />}
       {error && <Typography color="error">{error}</Typography>}

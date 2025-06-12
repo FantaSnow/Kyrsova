@@ -163,7 +163,7 @@ const SpecialtyAdmin: React.FC = () => {
         align="center"
         sx={{ mb: 3 }}
       >
-        Тестування SpecialtyService
+        Адміністрування спеціальностей
       </Typography>
       {loading && <CircularProgress />}
       {error && <Typography color="error">{error}</Typography>}

@@ -17,8 +17,8 @@ const fetchVolunteeringById = async (id: string) => {
       date: "10 червня 2025",
       location: "м. Київ, вул. Хрещатик, 22",
       org: "Благодійний фонд 'Відкриті Серця'",
-      orgLogo: volunteerImg,
-      image: volunteerImg,
+      orgLogo: "https://smr.gov.ua/images/news/Podii/2023/04/11/5.jpg",
+      image: "https://smr.gov.ua/images/news/Podii/2023/04/11/5.jpg",
       shifts: [
         "09:00 – 12:00 — потрібні 5 волонтерів;",
         "12:00 – 15:00 — потрібні 5 волонтерів;",
@@ -27,7 +27,7 @@ const fetchVolunteeringById = async (id: string) => {
       description:
         "Долучайтесь до організації благодійного ярмарку для збору коштів на підтримку ЗСУ. Потрібна допомога з підготовкою локації, роздачею листівок, організацією майстер-класів та підтримкою гостей.",
       tags: ["Організація", "Благодійність", "ЗСУ"],
-      banner: volunteerImg,
+      banner: "https://smr.gov.ua/images/news/Podii/2023/04/11/5.jpg",
     },
     {
       id: "2",

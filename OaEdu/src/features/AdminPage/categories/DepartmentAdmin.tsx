@@ -145,7 +145,7 @@ const DepartmentAdmin: React.FC = () => {
         align="center"
         sx={{ mb: 3 }}
       >
-        Тестування DepartmentService
+        Адміністрування кафедр
       </Typography>
       {loading && <CircularProgress />}
       {error && <Typography color="error">{error}</Typography>}

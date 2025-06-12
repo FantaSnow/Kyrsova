@@ -159,7 +159,7 @@ const TeacherAdmin: React.FC = () => {
         align="center"
         sx={{ mb: 3 }}
       >
-        Тестування TeacherService
+        Адміністрування викладачів
       </Typography>
       {loading && <CircularProgress />}
       {error && <Typography color="error">{error}</Typography>}

@@ -163,7 +163,7 @@ const ClassNumberAdmin: React.FC = () => {
         align="center"
         sx={{ mb: 3 }}
       >
-        Тестування ClassNumberService
+        Адміністрування номерів занять
       </Typography>
       {loading && <CircularProgress />}
       {error && <Typography color="error">{error}</Typography>}

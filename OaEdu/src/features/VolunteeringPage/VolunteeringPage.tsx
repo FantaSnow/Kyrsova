@@ -18,58 +18,27 @@ const volunteeringList = [
   {
     id: 1,
     title: "Допоможіть організувати благодійний ярмарок для підтримки ЗСУ",
-    image: volunteerImg,
+    image: "https://smr.gov.ua/images/news/Podii/2023/04/11/5.jpg",
     org: "Благодійний фонд 'Відкриті Серця'",
-    orgLogo: volunteerImg,
+    orgLogo:
+      "https://www.vidkrite-serce.dp.ua/wp-content/uploads/open-heart.png.pagespeed.ce.ls5gKTCNkh.png",
   },
   {
     id: 2,
     title: "Волонтер у притулку для тварин “Друзі”",
-    image: volunteerImg,
+    image:
+      "https://news.sumdu.edu.ua/images/news/2022/2022-09-30/1/photo_2022-09-29_14-05-15.jpg",
     org: "Притулок 'Друзі'",
-    orgLogo: volunteerImg,
+    orgLogo:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxYNzdEnSXYkRIDv7DiMl1sjlmxon6aAst_w&s",
   },
   {
     id: 3,
     title: "Проведення майстер-класів для дітей у лікарні",
-    image: volunteerImg,
+    image: "https://t1.ua/photos/articles/2021/03/55545_1_1097.jpg",
     org: "ГО 'Щасливе дитинство'",
-    orgLogo: volunteerImg,
-  },
-  {
-    id: 4,
-    title: "Допомога в організації ІТ-конференції для школярів",
-    image: volunteerImg,
-    org: "IT Step Academy",
-    orgLogo: volunteerImg,
-  },
-  {
-    id: 5,
-    title: "Сортування та пакування гуманітарної допомоги",
-    image: volunteerImg,
-    org: "Волонтерський центр “Разом”",
-    orgLogo: volunteerImg,
-  },
-  {
-    id: 6,
-    title: "Підтримка літніх людей: доставка продуктів та ліків",
-    image: volunteerImg,
-    org: "Червоний Хрест",
-    orgLogo: volunteerImg,
-  },
-  {
-    id: 7,
-    title: "Організація екологічної акції “Чисте місто”",
-    image: volunteerImg,
-    org: "Еко-ініціатива",
-    orgLogo: volunteerImg,
-  },
-  {
-    id: 8,
-    title: "Волонтерство на фестивалі сучасної музики",
-    image: volunteerImg,
-    org: "Молодіжний центр",
-    orgLogo: volunteerImg,
+    orgLogo:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmcoH8U3lO0aVdpmgewlHmJuV-ZIK4uHMY3g&s",
   },
 ];
 
